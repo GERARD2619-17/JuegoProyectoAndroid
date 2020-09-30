@@ -25,18 +25,7 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         cargarGrupos();
         cargar();
     }
-    private void cargarGrupos(){
-        int contador = 0;
-        for(int i = 1; i<=7; i++){
-            for(int j = 1; j <=5; j++){
-                int id = (int)(Math.random() * 2) + 1;
-                int cantidad = (int)(Math.random() * 6) + 1;
-                Grupo g = new Grupo(id,i,j,cantidad,contador,botones.get(i));
-                grupos.add(g);
-                contador++;
-            }
-        }
-    }
+    //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     private void agregarBotones(){
         Button btn1 = findViewById(R.id.btn1);
         botones.add(btn1);
@@ -144,143 +133,177 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         btn34.setOnClickListener(this);
         btn35.setOnClickListener(this);
     }
-
+    //Genera los valores aleatorios de nuestras piezas en el tablero y los agrega en la lista "grupos" para acceder a ellos cuando querramos
+    private void cargarGrupos(){
+        int contador = 0;
+        for(int i = 1; i<=7; i++){
+            for(int j = 1; j <=5; j++){
+                int id;
+                if(porcentaje(20)) id=0;
+                else id = (int)(Math.random() * 2) + 1;
+                int cantidad = (int)(Math.random() * 6) + 1;
+                Grupo g = new Grupo(id,i,j,cantidad,contador,botones.get(i));
+                grupos.add(g);
+                contador++;
+            }
+        }
+    }
+    //Carga las piezas en el tablero
     private void cargar(){
         for (int i=0;i<35;i++){
             String bando;
             String cant = Integer.toString(grupos.get(i).getCantidad());
             if(grupos.get(i).getId()==1){
+                //Aqui va el bando
                 botones.get(i).setBackgroundColor(Color.rgb(255,0,0));
             }
             else if(grupos.get(i).getId()==2){
+                //Aqui va el bando
                 botones.get(i).setBackgroundColor(Color.rgb(0,255,0));
             }
+            else botones.get(i).setBackgroundColor(Color.rgb(255,255,255));
+            //Aqui la cantidad
             botones.get(i).setText(cant);
         }
     }
-
+    //Funcion que recibe un numero entre 0 y 100 (porcentaje de resultado que espero) y me devuelve true o false
+    private boolean porcentaje(int n){
+        boolean retorno;
+        int si = n;
+        int[] PORCENTAJE = new int[100];
+        for(int i=0; i<si;i++) PORCENTAJE[i] = 1;
+        for (int i=si;i<100;i++) PORCENTAJE[i] = 0;
+        int cantidad = (int)(Math.random() * 99);
+        if(PORCENTAJE[cantidad]==1){
+            retorno = true;
+        }
+        else {
+            retorno = false;
+        }
+        return retorno;
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn1:
-                marcar(grupos.get(1).getId(),grupos.get(1).getPosX(),grupos.get(1).getPosY());
+                marcar(grupos.get(0).getId(),grupos.get(0).getPosX(),grupos.get(0).getPosY());
                 break;
             case R.id.btn2:
-                marcar(grupos.get(2).getId(),grupos.get(2).getPosX(),grupos.get(2).getPosY());
+                marcar(grupos.get(1).getId(),grupos.get(1).getPosX(),grupos.get(1).getPosY());
                 break;
             case R.id.btn3:
-                marcar(grupos.get(3).getId(),grupos.get(3).getPosX(),grupos.get(3).getPosY());
+                marcar(grupos.get(2).getId(),grupos.get(2).getPosX(),grupos.get(2).getPosY());
                 break;
             case R.id.btn4:
-                marcar(grupos.get(4).getId(),grupos.get(4).getPosX(),grupos.get(4).getPosY());
+                marcar(grupos.get(3).getId(),grupos.get(3).getPosX(),grupos.get(3).getPosY());
                 break;
             case R.id.btn5:
-                marcar(grupos.get(5).getId(),grupos.get(5).getPosX(),grupos.get(5).getPosY());
+                marcar(grupos.get(4).getId(),grupos.get(4).getPosX(),grupos.get(4).getPosY());
                 break;
             case R.id.btn6:
-                marcar(grupos.get(6).getId(),grupos.get(6).getPosX(),grupos.get(6).getPosY());
+                marcar(grupos.get(5).getId(),grupos.get(5).getPosX(),grupos.get(5).getPosY());
                 break;
             case R.id.btn7:
-                marcar(grupos.get(7).getId(),grupos.get(7).getPosX(),grupos.get(7).getPosY());
+                marcar(grupos.get(6).getId(),grupos.get(6).getPosX(),grupos.get(6).getPosY());
                 break;
             case R.id.btn8:
-                marcar(grupos.get(8).getId(),grupos.get(8).getPosX(),grupos.get(8).getPosY());
+                marcar(grupos.get(7).getId(),grupos.get(7).getPosX(),grupos.get(7).getPosY());
                 break;
             case R.id.btn9:
-                marcar(grupos.get(9).getId(),grupos.get(9).getPosX(),grupos.get(9).getPosY());
+                marcar(grupos.get(8).getId(),grupos.get(8).getPosX(),grupos.get(8).getPosY());
                 break;
             case R.id.btn10:
-                marcar(grupos.get(10).getId(),grupos.get(10).getPosX(),grupos.get(10).getPosY());
+                marcar(grupos.get(9).getId(),grupos.get(9).getPosX(),grupos.get(9).getPosY());
                 break;
             case R.id.btn11:
-                marcar(grupos.get(11).getId(),grupos.get(11).getPosX(),grupos.get(11).getPosY());
+                marcar(grupos.get(10).getId(),grupos.get(10).getPosX(),grupos.get(10).getPosY());
                 break;
             case R.id.btn12:
-                marcar(grupos.get(12).getId(),grupos.get(12).getPosX(),grupos.get(12).getPosY());
+                marcar(grupos.get(11).getId(),grupos.get(11).getPosX(),grupos.get(11).getPosY());
                 break;
             case R.id.btn13:
-                marcar(grupos.get(13).getId(),grupos.get(13).getPosX(),grupos.get(13).getPosY());
+                marcar(grupos.get(12).getId(),grupos.get(12).getPosX(),grupos.get(12).getPosY());
                 break;
             case R.id.btn14:
-                marcar(grupos.get(14).getId(),grupos.get(14).getPosX(),grupos.get(14).getPosY());
+                marcar(grupos.get(13).getId(),grupos.get(13).getPosX(),grupos.get(13).getPosY());
                 break;
             case R.id.btn15:
-                marcar(grupos.get(15).getId(),grupos.get(15).getPosX(),grupos.get(15).getPosY());
+                marcar(grupos.get(14).getId(),grupos.get(14).getPosX(),grupos.get(14).getPosY());
                 break;
             case R.id.btn16:
-                marcar(grupos.get(16).getId(),grupos.get(16).getPosX(),grupos.get(16).getPosY());
+                marcar(grupos.get(15).getId(),grupos.get(15).getPosX(),grupos.get(15).getPosY());
                 break;
             case R.id.btn17:
-                marcar(grupos.get(17).getId(),grupos.get(17).getPosX(),grupos.get(17).getPosY());
+                marcar(grupos.get(16).getId(),grupos.get(16).getPosX(),grupos.get(16).getPosY());
                 break;
             case R.id.btn18:
-                marcar(grupos.get(18).getId(),grupos.get(18).getPosX(),grupos.get(18).getPosY());
+                marcar(grupos.get(17).getId(),grupos.get(17).getPosX(),grupos.get(17).getPosY());
                 break;
             case R.id.btn19:
-                marcar(grupos.get(19).getId(),grupos.get(19).getPosX(),grupos.get(19).getPosY());
+                marcar(grupos.get(18).getId(),grupos.get(18).getPosX(),grupos.get(18).getPosY());
                 break;
             case R.id.btn20:
-                marcar(grupos.get(20).getId(),grupos.get(20).getPosX(),grupos.get(20).getPosY());
+                marcar(grupos.get(19).getId(),grupos.get(19).getPosX(),grupos.get(19).getPosY());
                 break;
             case R.id.btn21:
-                marcar(grupos.get(21).getId(),grupos.get(21).getPosX(),grupos.get(21).getPosY());
+                marcar(grupos.get(20).getId(),grupos.get(20).getPosX(),grupos.get(20).getPosY());
                 break;
             case R.id.btn22:
-                marcar(grupos.get(22).getId(),grupos.get(22).getPosX(),grupos.get(22).getPosY());
+                marcar(grupos.get(21).getId(),grupos.get(21).getPosX(),grupos.get(21).getPosY());
                 break;
             case R.id.btn23:
-                marcar(grupos.get(23).getId(),grupos.get(23).getPosX(),grupos.get(23).getPosY());
+                marcar(grupos.get(22).getId(),grupos.get(22).getPosX(),grupos.get(22).getPosY());
                 break;
             case R.id.btn24:
-                marcar(grupos.get(24).getId(),grupos.get(24).getPosX(),grupos.get(24).getPosY());
+                marcar(grupos.get(23).getId(),grupos.get(23).getPosX(),grupos.get(23).getPosY());
                 break;
             case R.id.btn25:
-                marcar(grupos.get(25).getId(),grupos.get(25).getPosX(),grupos.get(25).getPosY());
+                marcar(grupos.get(24).getId(),grupos.get(24).getPosX(),grupos.get(24).getPosY());
                 break;
             case R.id.btn26:
-                marcar(grupos.get(26).getId(),grupos.get(26).getPosX(),grupos.get(26).getPosY());
+                marcar(grupos.get(25).getId(),grupos.get(25).getPosX(),grupos.get(25).getPosY());
                 break;
             case R.id.btn27:
-                marcar(grupos.get(27).getId(),grupos.get(27).getPosX(),grupos.get(27).getPosY());
+                marcar(grupos.get(26).getId(),grupos.get(26).getPosX(),grupos.get(26).getPosY());
                 break;
             case R.id.btn28:
-                marcar(grupos.get(28).getId(),grupos.get(28).getPosX(),grupos.get(28).getPosY());
+                marcar(grupos.get(27).getId(),grupos.get(27).getPosX(),grupos.get(27).getPosY());
                 break;
             case R.id.btn29:
-                marcar(grupos.get(29).getId(),grupos.get(29).getPosX(),grupos.get(29).getPosY());
+                marcar(grupos.get(28).getId(),grupos.get(28).getPosX(),grupos.get(28).getPosY());
                 break;
             case R.id.btn30:
-                marcar(grupos.get(30).getId(),grupos.get(30).getPosX(),grupos.get(30).getPosY());
+                marcar(grupos.get(29).getId(),grupos.get(29).getPosX(),grupos.get(29).getPosY());
                 break;
             case R.id.btn31:
-                marcar(grupos.get(31).getId(),grupos.get(31).getPosX(),grupos.get(31).getPosY());
+                marcar(grupos.get(30).getId(),grupos.get(30).getPosX(),grupos.get(30).getPosY());
                 break;
             case R.id.btn32:
-                marcar(grupos.get(32).getId(),grupos.get(32).getPosX(),grupos.get(32).getPosY());
+                marcar(grupos.get(31).getId(),grupos.get(31).getPosX(),grupos.get(31).getPosY());
                 break;
             case R.id.btn33:
-                marcar(grupos.get(33).getId(),grupos.get(33).getPosX(),grupos.get(33).getPosY());
+                marcar(grupos.get(32).getId(),grupos.get(32).getPosX(),grupos.get(32).getPosY());
                 break;
             case R.id.btn34:
-                marcar(grupos.get(34).getId(),grupos.get(34).getPosX(),grupos.get(34).getPosY());
+                marcar(grupos.get(33).getId(),grupos.get(33).getPosX(),grupos.get(33).getPosY());
                 break;
             case R.id.btn35:
-                marcar(grupos.get(35).getId(),grupos.get(35).getPosX(),grupos.get(35).getPosY());
+                marcar(grupos.get(34).getId(),grupos.get(34).getPosX(),grupos.get(34).getPosY());
                 break;
+
         }
     }
 
     private void marcar(int id, int x, int y){
         Grupo g = getGrupo(x,y);
         botones.get(g.getNumero()).setBackgroundColor(Color.rgb(0,0,255));
-
     }
     private Grupo getGrupo(int x, int y){
         Boolean validar = false;
         Grupo g = new Grupo();
         for(int i=0;i<35;i++){
             if(grupos.get(i).getPosX() == x && grupos.get(i).getPosY() == y){
-                g=grupos.get(i-1);
+                g=grupos.get(i);
             }
         }
         return g;
