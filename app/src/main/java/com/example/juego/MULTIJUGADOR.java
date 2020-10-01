@@ -19,10 +19,12 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     private List<Button> botones = new ArrayList<>();
     private int turno=1;
     private int NumeroEnJuego=0;
+    private int turnos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_u_l_t_i_j_u_g_a_d_o_r);
+        turnos = 0;
         agregarBotones();
         cargarGrupos();
         cargar();
@@ -301,7 +303,7 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         if(turno==1) turno=2;
         else turno=1;
         NumeroEnJuego = 0;
-        cargar();
+
     }
     //Pinta los espacios a los que me puedo mover
     private void marcar(int id, int x, int y){
@@ -400,7 +402,11 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     }
     //Incrementa las tropas en cada celda
     private void Incrementar(){
+        if(turnos<12){
+            turnos++;
+        }
         //Saco la lista de los numeros de las celdas a alterar y la almaceno en el arreglo "celdas"
+
         List<Integer> celdas = new ArrayList<>();
         if(turno==1){
             for(int i=0 ;i<grupos.size();i++){
@@ -418,7 +424,15 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         }
         //Tomo el arreglo "celdas" e incremento
         for(int i=0; i<celdas.size();i++){
-
+            //Si la celda es mayor a 6
+            if(grupos.get(celdas.get(i)).getCantidad()<6){
+                //tengo el 90% de incrementar su valor
+                if(porcentaje(90)){
+                    grupos.get(celdas.get(i)).setCantidad(grupos.get(celdas.get(i)).getCantidad()+1);
+                }
+            }
+            cargar();
         }
     }
+
 }
