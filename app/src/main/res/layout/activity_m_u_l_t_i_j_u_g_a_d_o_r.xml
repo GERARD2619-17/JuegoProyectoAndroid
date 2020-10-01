@@ -34,9 +34,22 @@
                 android:id="@+id/button7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="Finish_onClick"
                 android:text="@string/btnSalir"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTurno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zombies"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button6"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,6 +59,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +92,7 @@
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr2" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn3"
@@ -95,11 +110,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr1"
-                        android:adjustViewBounds="true" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn5"
@@ -138,7 +153,7 @@
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr2" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn8"
@@ -156,11 +171,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr1"
-                        android:adjustViewBounds="true" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn10"
@@ -199,7 +214,7 @@
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr2" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn13"
@@ -217,11 +232,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr1"
-                        android:adjustViewBounds="true" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn15"
@@ -260,7 +275,7 @@
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr2" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn18"
@@ -278,11 +293,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr1"
-                        android:adjustViewBounds="true" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn20"
@@ -321,7 +336,7 @@
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr2" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn23"
@@ -339,11 +354,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr1"
-                        android:adjustViewBounds="true" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn25"
@@ -382,7 +397,7 @@
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr2" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn28"
@@ -400,11 +415,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr1"
-                        android:adjustViewBounds="true" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn30"
@@ -443,7 +458,7 @@
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr2" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn33"
@@ -461,11 +476,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:adjustViewBounds="true"
                         android:background="@drawable/custom_button"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fr1"
-                        android:adjustViewBounds="true" />
+                        app:srcCompat="@drawable/fr1" />
 
                     <ImageButton
                         android:id="@+id/btn35"

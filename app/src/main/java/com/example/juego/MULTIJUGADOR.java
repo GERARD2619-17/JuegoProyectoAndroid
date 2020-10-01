@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.juego.clases.Grupo;
 
@@ -20,10 +21,12 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     private int turno=1;
     private int NumeroEnJuego=0;
     private int turnos;
+    TextView t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_u_l_t_i_j_u_g_a_d_o_r);
+        t = findViewById(R.id.txtTurno);
         turnos = 0;
         agregarBotones();
         cargarGrupos();
@@ -156,55 +159,105 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     private void cargar(){
         for (int i=0;i<35;i++){
             grupos.get(i).setEstado(0);
-            ImagenBoton(i,grupos.get(i).getCantidad());
+            ImagenBoton(i,grupos.get(i).getCantidad(),1);
         }
     }
-    private void ImagenBoton(int n1, int n2){
-        if(grupos.get(n1).getId()==1){
-            switch (n2){
-                case 1:
-                    botones.get(n1).setImageResource(R.drawable.fr1);
-                    break;
-                case 2:
-                    botones.get(n1).setImageResource(R.drawable.fr2);
-                    break;
-                case 3:
-                    botones.get(n1).setImageResource(R.drawable.fr3);
-                    break;
-                case 4:
-                    botones.get(n1).setImageResource(R.drawable.fr4);
-                    break;
-                case 5:
-                    botones.get(n1).setImageResource(R.drawable.fr5);
-                    break;
-                case 6:
-                    botones.get(n1).setImageResource(R.drawable.fr6);
-                    break;
+    private void ImagenBoton(int n1, int n2, int n3){
+        if(n3==1){
+            if(grupos.get(n1).getId()==1){
+                switch (n2){
+                    case 1:
+                        botones.get(n1).setImageResource(R.drawable.fr1);
+                        break;
+                    case 2:
+                        botones.get(n1).setImageResource(R.drawable.fr2);
+                        break;
+                    case 3:
+                        botones.get(n1).setImageResource(R.drawable.fr3);
+                        break;
+                    case 4:
+                        botones.get(n1).setImageResource(R.drawable.fr4);
+                        break;
+                    case 5:
+                        botones.get(n1).setImageResource(R.drawable.fr5);
+                        break;
+                    case 6:
+                        botones.get(n1).setImageResource(R.drawable.fr6);
+                        break;
+                }
+            }
+            else if(grupos.get(n1).getId()==2){
+                switch (n2){
+                    case 1:
+                        botones.get(n1).setImageResource(R.drawable.m1);
+                        break;
+                    case 2:
+                        botones.get(n1).setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        botones.get(n1).setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        botones.get(n1).setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        botones.get(n1).setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        botones.get(n1).setImageResource(R.drawable.m6);
+                        break;
+                }
+            }else{
+                botones.get(n1).setImageResource(R.drawable.n);
             }
         }
-        else if(grupos.get(n1).getId()==2){
-            switch (n2){
-                case 1:
-                    botones.get(n1).setImageResource(R.drawable.m1);
-                    break;
-                case 2:
-                    botones.get(n1).setImageResource(R.drawable.m2);
-                    break;
-                case 3:
-                    botones.get(n1).setImageResource(R.drawable.m3);
-                    break;
-                case 4:
-                    botones.get(n1).setImageResource(R.drawable.m4);
-                    break;
-                case 5:
-                    botones.get(n1).setImageResource(R.drawable.m5);
-                    break;
-                case 6:
-                    botones.get(n1).setImageResource(R.drawable.m6);
-                    break;
+        else{
+            if(grupos.get(n1).getId()==1){
+                switch (n2){
+                    case 1:
+                        botones.get(n1).setImageResource(R.drawable.rf1);
+                        break;
+                    case 2:
+                        botones.get(n1).setImageResource(R.drawable.rf2);
+                        break;
+                    case 3:
+                        botones.get(n1).setImageResource(R.drawable.rf3);
+                        break;
+                    case 4:
+                        botones.get(n1).setImageResource(R.drawable.rf4);
+                        break;
+                    case 5:
+                        botones.get(n1).setImageResource(R.drawable.rf5);
+                        break;
+                    case 6:
+                        botones.get(n1).setImageResource(R.drawable.rf6);
+                        break;
+                }
             }
-        }else{
-            botones.get(n1).setImageResource(R.drawable.n);
+            else if(grupos.get(n1).getId()==2){
+                switch (n2){
+                    case 1:
+                        botones.get(n1).setImageResource(R.drawable.rm1);
+                        break;
+                    case 2:
+                        botones.get(n1).setImageResource(R.drawable.rm2);
+                        break;
+                    case 3:
+                        botones.get(n1).setImageResource(R.drawable.rm3);
+                        break;
+                    case 4:
+                        botones.get(n1).setImageResource(R.drawable.rm4);
+                        break;
+                    case 5:
+                        botones.get(n1).setImageResource(R.drawable.rm5);
+                        break;
+                    case 6:
+                        botones.get(n1).setImageResource(R.drawable.rm6);
+                        break;
+                }
+            }else{
+                botones.get(n1).setImageResource(R.drawable.n);
+            }
         }
     }
     //Funcion que recibe un numero entre 0 y 100 (porcentaje de resultado que espero) y me devuelve true o false
@@ -336,12 +389,21 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     //Boton TERMINAR TURNO
     public void Turno_onClick(View v){
         Incrementar();
-        if(turno==1) turno=2;
-        else turno=1;
+        if(turno==1) {
+            t.setText("Momias");
+            turno=2;
+        }
+        else{
+            t.setText("Zombies");
+            turno=1;
+        }
         NumeroEnJuego = 0;
 
     }
     //Pinta los espacios a los que me puedo mover
+    public void Finish_onClick(View v){
+        finish();
+    }
     private void marcar(int id, int x, int y){
         //Primer condicion que no esté en una esquina
         //Segunda condicion que no esté al lado de un campo de juego nulo
@@ -350,19 +412,23 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         //Quinta condicion que el campo de al lado no sea de su mismo equipo
         if(x>1 && getGrupo(x-1,y).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x-1,y).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x-1,y).getNumero()).setEstado(1);
-            botones.get(getGrupo(x-1,y).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
+            ImagenBoton(getGrupo(x-1,y).getNumero(),getGrupo(x-1,y).getCantidad(),2);
+            //botones.get(getGrupo(x-1,y).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(x<7 && getGrupo(x+1,y).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x+1,y).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x+1,y).getNumero()).setEstado(1);
-            botones.get(getGrupo(x+1,y).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
+            ImagenBoton(getGrupo(x+1,y).getNumero(),getGrupo(x+1,y).getCantidad(),2);
+            //botones.get(getGrupo(x+1,y).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(y>1 && getGrupo(x,y-1).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x,y-1).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x,y-1).getNumero()).setEstado(1);
-            botones.get(getGrupo(x,y-1).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
+            ImagenBoton(getGrupo(x,y-1).getNumero(),getGrupo(x,y-1).getCantidad(),2);
+            //botones.get(getGrupo(x,y-1).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(y<5 && getGrupo(x,y+1).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x,y+1).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x,y+1).getNumero()).setEstado(1);
-            botones.get(getGrupo(x,y+1).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
+            ImagenBoton(getGrupo(x,y+1).getNumero(),getGrupo(x,y+1).getCantidad(),2);
+            //botones.get(getGrupo(x,y+1).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         grupos.get(getGrupo(x,y).getNumero()).setEstado(2);
     }
