@@ -15,5 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public void MULTIJUGADOR_onClick(View v){
         Intent multijugador = new Intent(this, PantallaMenuDos.class);
         startActivity(multijugador);
+        //prueba  para ver si sirve el gitgud
+
     }
 }
