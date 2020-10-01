@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.example.juego.clases.Grupo;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListener{
 
     private List<Grupo> grupos = new ArrayList<>();
-    private List<Button> botones = new ArrayList<>();
+    private List<ImageButton> botones = new ArrayList<>();
     private int turno=1;
     private int NumeroEnJuego=0;
     private int turnos;
@@ -31,75 +31,75 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     }
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     private void agregarBotones(){
-        Button btn1 = findViewById(R.id.btn1);
+        ImageButton btn1 = findViewById(R.id.btn1);
         botones.add(btn1);
-        Button btn2 = findViewById(R.id.btn2);
+        ImageButton btn2 = findViewById(R.id.btn2);
         botones.add(btn2);
-        Button btn3 = findViewById(R.id.btn3);
+        ImageButton btn3 = findViewById(R.id.btn3);
         botones.add(btn3);
-        Button btn4 = findViewById(R.id.btn4);
+        ImageButton btn4 = findViewById(R.id.btn4);
         botones.add(btn4);
-        Button btn5 = findViewById(R.id.btn5);
+        ImageButton btn5 = findViewById(R.id.btn5);
         botones.add(btn5);
-        Button btn6 = findViewById(R.id.btn6);
+        ImageButton btn6 = findViewById(R.id.btn6);
         botones.add(btn6);
-        Button btn7 = findViewById(R.id.btn7);
+        ImageButton btn7 = findViewById(R.id.btn7);
         botones.add(btn7);
-        Button btn8 = findViewById(R.id.btn8);
+        ImageButton btn8 = findViewById(R.id.btn8);
         botones.add(btn8);
-        Button btn9 = findViewById(R.id.btn9);
+        ImageButton btn9 = findViewById(R.id.btn9);
         botones.add(btn9);
-        Button btn10 = findViewById(R.id.btn10);
+        ImageButton btn10 = findViewById(R.id.btn10);
         botones.add(btn10);
-        Button btn11 = findViewById(R.id.btn11);
+        ImageButton btn11 = findViewById(R.id.btn11);
         botones.add(btn11);
-        Button btn12 = findViewById(R.id.btn12);
+        ImageButton btn12 = findViewById(R.id.btn12);
         botones.add(btn12);
-        Button btn13 = findViewById(R.id.btn13);
+        ImageButton btn13 = findViewById(R.id.btn13);
         botones.add(btn13);
-        Button btn14 = findViewById(R.id.btn14);
+        ImageButton btn14 = findViewById(R.id.btn14);
         botones.add(btn14);
-        Button btn15 = findViewById(R.id.btn15);
+        ImageButton btn15 = findViewById(R.id.btn15);
         botones.add(btn15);
-        Button btn16 = findViewById(R.id.btn16);
+        ImageButton btn16 = findViewById(R.id.btn16);
         botones.add(btn16);
-        Button btn17 = findViewById(R.id.btn17);
+        ImageButton btn17 = findViewById(R.id.btn17);
         botones.add(btn17);
-        Button btn18 = findViewById(R.id.btn18);
+        ImageButton btn18 = findViewById(R.id.btn18);
         botones.add(btn18);
-        Button btn19 = findViewById(R.id.btn19);
+        ImageButton btn19 = findViewById(R.id.btn19);
         botones.add(btn19);
-        Button btn20 = findViewById(R.id.btn20);
+        ImageButton btn20 = findViewById(R.id.btn20);
         botones.add(btn20);
-        Button btn21 = findViewById(R.id.btn21);
+        ImageButton btn21 = findViewById(R.id.btn21);
         botones.add(btn21);
-        Button btn22 = findViewById(R.id.btn22);
+        ImageButton btn22 = findViewById(R.id.btn22);
         botones.add(btn22);
-        Button btn23 = findViewById(R.id.btn23);
+        ImageButton btn23 = findViewById(R.id.btn23);
         botones.add(btn23);
-        Button btn24 = findViewById(R.id.btn24);
+        ImageButton btn24 = findViewById(R.id.btn24);
         botones.add(btn24);
-        Button btn25 = findViewById(R.id.btn25);
+        ImageButton btn25 = findViewById(R.id.btn25);
         botones.add(btn25);
-        Button btn26 = findViewById(R.id.btn26);
+        ImageButton btn26 = findViewById(R.id.btn26);
         botones.add(btn26);
-        Button btn27 = findViewById(R.id.btn27);
+        ImageButton btn27 = findViewById(R.id.btn27);
         botones.add(btn27);
-        Button btn28 = findViewById(R.id.btn28);
+        ImageButton btn28 = findViewById(R.id.btn28);
         botones.add(btn28);
-        Button btn29 = findViewById(R.id.btn29);
+        ImageButton btn29 = findViewById(R.id.btn29);
         botones.add(btn29);
-        Button btn30 = findViewById(R.id.btn30);
+        ImageButton btn30 = findViewById(R.id.btn30);
         botones.add(btn30);
-        Button btn31 = findViewById(R.id.btn31);
+        ImageButton btn31 = findViewById(R.id.btn31);
         botones.add(btn31);
-        Button btn32 = findViewById(R.id.btn32);
+        ImageButton btn32 = findViewById(R.id.btn32);
         botones.add(btn32);
-        Button btn33 = findViewById(R.id.btn33);
+        ImageButton btn33 = findViewById(R.id.btn33);
         botones.add(btn33);
-        Button btn34 = findViewById(R.id.btn34);
+        ImageButton btn34 = findViewById(R.id.btn34);
         botones.add(btn34);
-        Button btn35 = findViewById(R.id.btn35);
+        ImageButton btn35 = findViewById(R.id.btn35);
         botones.add(btn35);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
@@ -156,19 +156,55 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     private void cargar(){
         for (int i=0;i<35;i++){
             grupos.get(i).setEstado(0);
-            String bando;
-            String cant = Integer.toString(grupos.get(i).getCantidad());
-            if(grupos.get(i).getId()==1){
-                //Aqui va el bando
-                botones.get(i).setBackgroundColor(Color.rgb(255,0,0));
+            ImagenBoton(i,grupos.get(i).getCantidad());
+        }
+    }
+    private void ImagenBoton(int n1, int n2){
+        if(grupos.get(n1).getId()==1){
+            switch (n2){
+                case 1:
+                    botones.get(n1).setImageResource(R.drawable.fr1);
+                    break;
+                case 2:
+                    botones.get(n1).setImageResource(R.drawable.fr2);
+                    break;
+                case 3:
+                    botones.get(n1).setImageResource(R.drawable.fr3);
+                    break;
+                case 4:
+                    botones.get(n1).setImageResource(R.drawable.fr4);
+                    break;
+                case 5:
+                    botones.get(n1).setImageResource(R.drawable.fr5);
+                    break;
+                case 6:
+                    botones.get(n1).setImageResource(R.drawable.fr6);
+                    break;
             }
-            else if(grupos.get(i).getId()==2){
-                //Aqui va el bando
-                botones.get(i).setBackgroundColor(Color.rgb(0,255,0));
+        }
+        else if(grupos.get(n1).getId()==2){
+            switch (n2){
+                case 1:
+                    botones.get(n1).setImageResource(R.drawable.m1);
+                    break;
+                case 2:
+                    botones.get(n1).setImageResource(R.drawable.m2);
+                    break;
+                case 3:
+                    botones.get(n1).setImageResource(R.drawable.m3);
+                    break;
+                case 4:
+                    botones.get(n1).setImageResource(R.drawable.m4);
+                    break;
+                case 5:
+                    botones.get(n1).setImageResource(R.drawable.m5);
+                    break;
+                case 6:
+                    botones.get(n1).setImageResource(R.drawable.m6);
+                    break;
             }
-            else botones.get(i).setBackgroundColor(Color.rgb(255,255,255));
-            //Aqui la cantidad
-            botones.get(i).setText(cant);
+        }else{
+            botones.get(n1).setImageResource(R.drawable.n);
         }
     }
     //Funcion que recibe un numero entre 0 y 100 (porcentaje de resultado que espero) y me devuelve true o false
