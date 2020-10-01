@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
     public void MULTIJUGADOR_onClick(View v){
-        Intent multijugador = new Intent(this, MULTIJUGADOR.class);
+        Intent multijugador = new Intent(this, PantallaMenuDos.class);
         startActivity(multijugador);
     }
 }

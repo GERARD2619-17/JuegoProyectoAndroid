@@ -5,4 +5,9 @@
     <string name="btnSalir">Salir</string>
     <string name="txtJuego">Juego</string>
     <string name="btnTerminarTurno">Terminar Turno</string>
+    //pantalla 2
+    <string name="txtMenuseleccion">Menu de Juego</string>
+    <string name="btnonline">ORDENADOR</string>
+    <string name="btnvspersonas">P VS P</string>
+    <string name="btnAtras">RETROSEDER</string>
 </resources>
