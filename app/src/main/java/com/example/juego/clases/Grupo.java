@@ -1,22 +1,26 @@
 package com.example.juego.clases;
 
-import android.widget.Button;
-
 public class Grupo {
+    //Id el identificador del equipo: 1 = equipo a, 2 = equipo b, 0 = celda nula
     private int id;
+    //Posicion en x del tablero
     private int posX;
+    //Posicion en y del tablero
     private int posY;
+    //Cantidad de piezas en cada cuadro del tablero
     private int cantidad;
+    //Numero que tiene en el tablero ej: (1,1) = 1, (1,2) = 2, etc.
     private int numero;
-    private Button btn;
+    //Si es el atacado, el que ataca u otra celda: 0 No juega, 1 Celda bajo ataque, 2 Celda atacante
+    private int estado;
 
-    public Grupo(int I, int X, int Y, int C, int N, Button btn){
+    public Grupo(int I, int X, int Y, int C, int N, int E){
         this.id = I;
         this.posX = X;
         this.posY = Y;
         this.cantidad = C;
         this.numero = N;
-        this.btn = btn;
+        this.estado = E;
     }
 
     public Grupo(){}
@@ -52,19 +56,16 @@ public class Grupo {
         this.cantidad = cantidad;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
     public int getNumero() {
         return numero;
     }
 
-    public Button getBtn() {
-        return btn;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public void setBtn(Button btn) {
-        this.btn = btn;
-    }
+    public int getEstado() { return estado; }
+
+    public void setEstado(int estado) { this.estado = estado; }
+
 }
