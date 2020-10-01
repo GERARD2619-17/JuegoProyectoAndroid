@@ -141,7 +141,7 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         for(int i = 1; i<=7; i++){
             for(int j = 1; j <=5; j++){
                 int id;
-                if(porcentaje(15)) id=0;
+                if(porcentaje(12)) id=0;
                 else id = (int)(Math.random() * 2) + 1;
                 int cantidad = (int)(Math.random() * 6) + 1;
                 Grupo g = new Grupo(id,i,j,cantidad,contador, 0);

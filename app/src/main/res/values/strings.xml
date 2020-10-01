@@ -9,5 +9,5 @@
     <string name="txtMenuseleccion">Menu de Juego</string>
     <string name="btnonline">ORDENADOR</string>
     <string name="btnvspersonas">P VS P</string>
-    <string name="btnAtras">RETROSEDER</string>
+    <string name="btnAtras">ATRAS</string>
 </resources>
