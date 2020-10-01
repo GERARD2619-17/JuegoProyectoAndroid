@@ -361,41 +361,22 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         Grupo Atacado = grupos.get(n1);
         Grupo Atacante = grupos.get(n2);
 
-
         if(Atacante.getCantidad() > Atacado.getCantidad()){
-            if(porcentaje(90)){
-                //Gana Atacante
-                Ganador = Atacante.getCantidad() - Atacado.getCantidad();
-                grupos.get(n1).setId(grupos.get(n2).getId());
-            }
-            else {
-                //Gana Atacado
-                Ganador = 1;
-            }
+            //Gana Atacante
+            Ganador = Atacante.getCantidad() - Atacado.getCantidad();
+            grupos.get(n1).setId(grupos.get(n2).getId());
             grupos.get(n1).setCantidad(Ganador);
         }else if(Atacado.getCantidad() > Atacante.getCantidad()){
-            if(porcentaje(90)){
-                //Gana Atacado
-                Ganador = Atacado.getCantidad() - Atacante.getCantidad();
-            }
-            else {
-                //Gana Atacante
-                Ganador = 1;
-                grupos.get(n1).setId(grupos.get(n2).getId());
-            }
+            //Gana Atacado
+            Ganador = Atacado.getCantidad() - Atacante.getCantidad();
             grupos.get(n1).setCantidad(Ganador);
         }
         else {
-            if(porcentaje(70)){
-                Ganador = 1;
-            }
-            else {
-                Ganador = (int)(Math.random() * n2-1)+1;
-            }
             if(porcentaje(50)){
-                //Gana Atacante
-                grupos.get(n1).setId(grupos.get(n2).getId());
+            //Gana Atacante
+            grupos.get(n1).setId(grupos.get(n2).getId());
             }
+            Ganador = 1;
             grupos.get(n1).setCantidad(Ganador);
         }
         grupos.get(n2).setCantidad(1);
@@ -406,7 +387,6 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
             turnos++;
         }
         //Saco la lista de los numeros de las celdas a alterar y la almaceno en el arreglo "celdas"
-
         List<Integer> celdas = new ArrayList<>();
         if(turno==1){
             for(int i=0 ;i<grupos.size();i++){
