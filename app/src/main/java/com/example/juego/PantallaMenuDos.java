@@ -17,4 +17,8 @@ public class PantallaMenuDos extends AppCompatActivity {
         Intent vspersonas = new Intent(this, MULTIJUGADOR.class);
         startActivity(vspersonas);
     }
+    public void Retroceder_onClick(View v){
+        Intent retroceder = new Intent(this, MainActivity.class);
+        startActivity(retroceder);
+    }
 }

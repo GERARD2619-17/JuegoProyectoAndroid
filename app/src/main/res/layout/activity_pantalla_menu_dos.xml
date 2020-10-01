@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PantallaMenuDos">
+    android:orientation="vertical"
+    android:background="@drawable/parajuego"
+    tools:context=".PantallaMenuDos"
+    >
 
     <TextView
-        android:layout_width="240dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:text="@string/txtMenuseleccion"
         android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnonline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        android:textColor="#FFFFFF"
+
+        android:layout_marginTop="95dp"
+        android:text="@string/txtMenuseleccion" />
 
     <Button
         android:id="@+id/btnonline"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
+        android:alpha="0.80"
         android:text="@string/btnonline"
-        app:layout_constraintBottom_toTopOf="@+id/btnvspersonas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        android:textColor="#FDFFFF" />
 
     <Button
         android:id="@+id/btnvspersonas"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:alpha="0.80"
+        android:textColor="#FFFFFF"
+        android:onClick="VSPersonas_onClick"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
         android:gravity="center"
-        android:onClick="VSPersonas_onClick"
         android:text="@string/btnvspersonas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="OnClick" />
 
     <Button
@@ -53,13 +56,14 @@
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:onClick="Retroceder_onClick"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:alpha="0.80"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/custom_button"
-        android:text="@string/btnAtras"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnvspersonas"
-        app:layout_constraintVertical_bias="0.25" />
+        android:text="@string/btnAtras" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

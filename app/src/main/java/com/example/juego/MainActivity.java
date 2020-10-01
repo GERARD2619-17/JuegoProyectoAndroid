@@ -15,7 +15,11 @@ public class MainActivity extends AppCompatActivity {
     public void MULTIJUGADOR_onClick(View v){
         Intent multijugador = new Intent(this, PantallaMenuDos.class);
         startActivity(multijugador);
+    }
 
-
+    public void Salir_onClick(View v){
+        if(v.getId()== R.id.btnsalir){
+            System.exit(0);
+        }
     }
 }
