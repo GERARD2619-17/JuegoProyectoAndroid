@@ -16,6 +16,7 @@ import java.util.List;
 
 public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListener{
 
+
     private List<Grupo> grupos = new ArrayList<>();
     private List<ImageButton> botones = new ArrayList<>();
     private int turno=1;
