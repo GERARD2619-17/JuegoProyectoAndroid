@@ -39,6 +39,7 @@
             android:layout_marginEnd="50dp"
             android:alpha="0.80"
             android:background="@drawable/custom_button"
+            android:onClick="AVENTURA_onClick"
             android:text="@string/btnAvetura"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"

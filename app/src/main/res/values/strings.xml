@@ -5,9 +5,14 @@
     <string name="btnSalir">Salir</string>
     <string name="txtJuego">Juego</string>
     <string name="btnTerminarTurno">Terminar Turno</string>
+    <string name="btnSiguiente">Siguiente</string>
+    <string name="btnAtras1">Atras</string>
     //pantalla 2
     <string name="txtMenuseleccion">Menu de Juego</string>
     <string name="btnonline">ORDENADOR</string>
     <string name="btnvspersonas">P VS P</string>
     <string name="btnAtras">ATRAS</string>
+    //mundo 1
+    <string name="txtTituloEgipto">Antiguo Egipto</string>
+
 </resources>
