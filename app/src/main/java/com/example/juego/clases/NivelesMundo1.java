@@ -80,7 +80,9 @@ public class NivelesMundo1 {
     public List<Grupo> getNivelesMundo1(){
         return this.grupos;
     }
-    //Niveles
+    //Niveles:
+    //I: 0 -> cuadro azul, I: 1 -> Zombie, I: 2 -> Momia
+    //C: cantidad > 1 y cantidad < 6
     public List<Grupo> nivel1(){
         List<Grupo> Level = new ArrayList<>();
         Level.add(new Grupo(0,0,0,0,0));
@@ -89,17 +91,17 @@ public class NivelesMundo1 {
         Level.add(new Grupo(0,0,3,0,3));
         Level.add(new Grupo(0,0,4,0,4));
         Level.add(new Grupo(0,1,0,0,5));
-        Level.add(new Grupo(1,1,1,0,6));
-        Level.add(new Grupo(2,1,2,0,7));
-        Level.add(new Grupo(2,1,3,0,8));
+        Level.add(new Grupo(1,1,1,5,6));
+        Level.add(new Grupo(2,1,2,3,7));
+        Level.add(new Grupo(2,1,3,1,8));
         Level.add(new Grupo(0,1,4,0,9));
         Level.add(new Grupo(0,2,0,0,10));
-        Level.add(new Grupo(1,2,1,0,11));
-        Level.add(new Grupo(1,2,2,0,12));
-        Level.add(new Grupo(1,2,3,0,13));
+        Level.add(new Grupo(1,2,1,4,11));
+        Level.add(new Grupo(1,2,2,2,12));
+        Level.add(new Grupo(2,2,3,6,13));
         Level.add(new Grupo(0,2,4,0,14));
         Level.add(new Grupo(0,3,0,0,15));
-        Level.add(new Grupo(0,3,1,0,16));
+        Level.add(new Grupo(1,3,1,0,16));
         Level.add(new Grupo(0,3,2,0,17));
         Level.add(new Grupo(0,3,3,0,18));
         Level.add(new Grupo(0,3,4,0,19));
