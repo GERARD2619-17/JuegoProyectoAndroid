@@ -15,7 +15,7 @@ import com.example.juego.clases.NivelesMundo1;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//Multijugador
 public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListener{
 
     private List<Grupo> grupos = new ArrayList<>();

@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Intent multijugador = new Intent(this, PantallaMenuDos.class);
         startActivity(multijugador);
     }
+    //Aventura
     public void AVENTURA_onClick(View v){
         Intent aventura = new Intent(this, Mundo1.class);
         startActivity(aventura);

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
+//menu2
 public class PantallaMenuDos extends AppCompatActivity {
 
     @Override
