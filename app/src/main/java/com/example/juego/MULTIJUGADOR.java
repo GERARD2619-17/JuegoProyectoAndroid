@@ -8,20 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.juego.clases.Grupo;
+import com.example.juego.clases.NivelesMundo1;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListener{
 
-
     private List<Grupo> grupos = new ArrayList<>();
     private List<ImageButton> botones = new ArrayList<>();
     private int turno=1;
     private int NumeroEnJuego=0;
     private int turnos;
+    private int Nivel;
     TextView t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +31,16 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_m_u_l_t_i_j_u_g_a_d_o_r);
         t = findViewById(R.id.txtTurno);
         turnos = 0;
+        if(getIntent().getStringExtra("nivel")!=null){
+            Nivel = Integer.parseInt(getIntent().getStringExtra("nivel"));
+        }
+        else {
+            Nivel=0;
+        }
         agregarBotones();
         cargarGrupos();
         cargar();
+
     }
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     private void agregarBotones(){
@@ -143,16 +152,22 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     }
     //Genera los valores aleatorios de nuestras piezas en el tablero y los agrega en la lista "grupos" para acceder a ellos cuando querramos
     private void cargarGrupos(){
-        int contador = 0;
-        for(int i = 1; i<=7; i++){
-            for(int j = 1; j <=5; j++){
-                int id;
-                if(porcentaje(12)) id=0;
-                else id = (int)(Math.random() * 2) + 1;
-                int cantidad = (int)(Math.random() * 6) + 1;
-                Grupo g = new Grupo(id,i,j,cantidad,contador, 0);
-                grupos.add(g);
-                contador++;
+        if(Nivel!=0){
+            NivelesMundo1 nivel = new NivelesMundo1(Nivel);
+            grupos = nivel.getNivelesMundo1();
+        }
+        else {
+            int contador = 0;
+            for(int i = 1; i<=7; i++){
+                for(int j = 1; j <=5; j++){
+                    int id;
+                    if(porcentaje(12)) id=0;
+                    else id = (int)(Math.random() * 2) + 1;
+                    int cantidad = (int)(Math.random() * 6) + 1;
+                    Grupo g = new Grupo(id,i,j,cantidad,contador);
+                    grupos.add(g);
+                    contador++;
+                }
             }
         }
     }

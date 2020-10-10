@@ -14,13 +14,13 @@ public class Grupo {
     //Si es el atacado, el que ataca u otra celda: 0 No juega, 1 Celda bajo ataque, 2 Celda atacante
     private int estado;
 
-    public Grupo(int I, int X, int Y, int C, int N, int E){
+    public Grupo(int I, int X, int Y, int C, int N){
         this.id = I;
         this.posX = X;
         this.posY = Y;
         this.cantidad = C;
         this.numero = N;
-        this.estado = E;
+        this.estado = 0;
     }
 
     public Grupo(){}
