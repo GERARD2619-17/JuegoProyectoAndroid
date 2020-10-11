@@ -23,7 +23,6 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     private int NumeroEnJuego=0;
     private static int contador=0;
     private Handler Correr;
-    private TextView txt;
     private boolean incrementando=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,6 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         agregarBotones();
         cargarGrupos();
         cargar();
-        this.txt = findViewById(R.id.txtContador);
     }
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     private void agregarBotones(){
@@ -523,7 +521,6 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
                 Correr.post(new Runnable() {
                     @Override
                     public void run() {
-                        txt.setText(String.valueOf(n+1));
                         contador=n;
                         List<Integer> celdas = new ArrayList<>();
                         if(turno==2){
@@ -558,7 +555,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         }
         private void metodoEspera() {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 contador++;
             }catch (Exception e ){
 

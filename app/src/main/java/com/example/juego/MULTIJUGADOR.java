@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,12 +25,15 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     private int NumeroEnJuego=0;
     private int turnos;
     private int Nivel;
-    TextView t;
+
+    private static int contador=0;
+    private Handler Correr;
+    private boolean incrementando=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_u_l_t_i_j_u_g_a_d_o_r);
-        t = findViewById(R.id.txtTurno);
+        this.Correr = new Handler();
         turnos = 0;
         if(getIntent().getStringExtra("nivel")!=null){
             Nivel = Integer.parseInt(getIntent().getStringExtra("nivel"));
@@ -293,127 +297,129 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn1:
-                Jugar(0);
-                break;
-            case R.id.btn2:
-                Jugar(1);
-                break;
-            case R.id.btn3:
-                Jugar(2);
-                break;
-            case R.id.btn4:
-                Jugar(3);
-                break;
-            case R.id.btn5:
-                Jugar(4);
-                break;
-            case R.id.btn6:
-                Jugar(5);
-                break;
-            case R.id.btn7:
-                Jugar(6);
-                break;
-            case R.id.btn8:
-                Jugar(7);
-                break;
-            case R.id.btn9:
-                Jugar(8);
-                break;
-            case R.id.btn10:
-                Jugar(9);
-                break;
-            case R.id.btn11:
-                Jugar(10);
-                break;
-            case R.id.btn12:
-                Jugar(11);
-                break;
-            case R.id.btn13:
-                Jugar(12);
-                break;
-            case R.id.btn14:
-                Jugar(13);
-                break;
-            case R.id.btn15:
-                Jugar(14);
-                break;
-            case R.id.btn16:
-                Jugar(15);
-                break;
-            case R.id.btn17:
-                Jugar(16);
-                break;
-            case R.id.btn18:
-                Jugar(17);
-                break;
-            case R.id.btn19:
-                Jugar(18);
-                break;
-            case R.id.btn20:
-                Jugar(19);
-                break;
-            case R.id.btn21:
-                Jugar(20);
-                break;
-            case R.id.btn22:
-                Jugar(21);
-                break;
-            case R.id.btn23:
-                Jugar(22);
-                break;
-            case R.id.btn24:
-                Jugar(23);
-                break;
-            case R.id.btn25:
-                Jugar(24);
-                break;
-            case R.id.btn26:
-                Jugar(25);
-                break;
-            case R.id.btn27:
-                Jugar(26);
-                break;
-            case R.id.btn28:
-                Jugar(27);
-                break;
-            case R.id.btn29:
-                Jugar(28);
-                break;
-            case R.id.btn30:
-                Jugar(29);
-                break;
-            case R.id.btn31:
-                Jugar(30);
-                break;
-            case R.id.btn32:
-                Jugar(31);
-                break;
-            case R.id.btn33:
-                Jugar(32);
-                break;
-            case R.id.btn34:
-                Jugar(33);
-                break;
-            case R.id.btn35:
-                Jugar(34);
-                break;
+        if(incrementando==false) {
+            switch (view.getId()) {
+                case R.id.btn1:
+                    Jugar(0);
+                    break;
+                case R.id.btn2:
+                    Jugar(1);
+                    break;
+                case R.id.btn3:
+                    Jugar(2);
+                    break;
+                case R.id.btn4:
+                    Jugar(3);
+                    break;
+                case R.id.btn5:
+                    Jugar(4);
+                    break;
+                case R.id.btn6:
+                    Jugar(5);
+                    break;
+                case R.id.btn7:
+                    Jugar(6);
+                    break;
+                case R.id.btn8:
+                    Jugar(7);
+                    break;
+                case R.id.btn9:
+                    Jugar(8);
+                    break;
+                case R.id.btn10:
+                    Jugar(9);
+                    break;
+                case R.id.btn11:
+                    Jugar(10);
+                    break;
+                case R.id.btn12:
+                    Jugar(11);
+                    break;
+                case R.id.btn13:
+                    Jugar(12);
+                    break;
+                case R.id.btn14:
+                    Jugar(13);
+                    break;
+                case R.id.btn15:
+                    Jugar(14);
+                    break;
+                case R.id.btn16:
+                    Jugar(15);
+                    break;
+                case R.id.btn17:
+                    Jugar(16);
+                    break;
+                case R.id.btn18:
+                    Jugar(17);
+                    break;
+                case R.id.btn19:
+                    Jugar(18);
+                    break;
+                case R.id.btn20:
+                    Jugar(19);
+                    break;
+                case R.id.btn21:
+                    Jugar(20);
+                    break;
+                case R.id.btn22:
+                    Jugar(21);
+                    break;
+                case R.id.btn23:
+                    Jugar(22);
+                    break;
+                case R.id.btn24:
+                    Jugar(23);
+                    break;
+                case R.id.btn25:
+                    Jugar(24);
+                    break;
+                case R.id.btn26:
+                    Jugar(25);
+                    break;
+                case R.id.btn27:
+                    Jugar(26);
+                    break;
+                case R.id.btn28:
+                    Jugar(27);
+                    break;
+                case R.id.btn29:
+                    Jugar(28);
+                    break;
+                case R.id.btn30:
+                    Jugar(29);
+                    break;
+                case R.id.btn31:
+                    Jugar(30);
+                    break;
+                case R.id.btn32:
+                    Jugar(31);
+                    break;
+                case R.id.btn33:
+                    Jugar(32);
+                    break;
+                case R.id.btn34:
+                    Jugar(33);
+                    break;
+                case R.id.btn35:
+                    Jugar(34);
+                    break;
+            }
         }
     }
     //Boton TERMINAR TURNO
     public void Turno_onClick(View v){
-        Incrementar();
+        incrementando=true;
+        //Incrementar();
+        new Thread(new cargaLenta()).start();
+        contador = 0;
         if(turno==1) {
-            t.setText("Momias");
             turno=2;
         }
         else{
-            t.setText("Zombies");
             turno=1;
         }
         NumeroEnJuego = 0;
-
     }
     //Pinta los espacios a los que me puedo mover
     public void Finish_onClick(View v){
@@ -499,37 +505,76 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         grupos.get(n2).setCantidad(1);
     }
     //Incrementa las tropas en cada celda
-    private void Incrementar(){
-        if(turnos<12){
-            turnos++;
-        }
+    private List<Integer> celdasAfectadas(){
         //Saco la lista de los numeros de las celdas a alterar y la almaceno en el arreglo "celdas"
         List<Integer> celdas = new ArrayList<>();
-        if(turno==1){
+        if(turno==2){
             for(int i=0 ;i<grupos.size();i++){
-                if(grupos.get(i).getId()==1){
+                if(grupos.get(i).getId()==1 && grupos.get(i).getCantidad()<6){
                     celdas.add(grupos.get(i).getNumero());
                 }
             }
         }
         else{
             for(int i=0 ;i<grupos.size();i++){
-                if(grupos.get(i).getId()==2){
+                if(grupos.get(i).getId()==2 && grupos.get(i).getCantidad()<6){
                     celdas.add(grupos.get(i).getNumero());
                 }
             }
         }
-        //Tomo el arreglo "celdas" e incremento
-        for(int i=0; i<celdas.size();i++){
-            //Si la celda es mayor a 6
-            if(grupos.get(celdas.get(i)).getCantidad()<6){
-                //tengo el 90% de incrementar su valor
-                if(porcentaje(90)){
-                    grupos.get(celdas.get(i)).setCantidad(grupos.get(celdas.get(i)).getCantidad()+1);
-                }
-            }
-            cargar();
-        }
+        return celdas;
     }
+    //Incrementa las tropas en cada celda
+    final class cargaLenta implements  Runnable{
+        int n=0;
+        @Override
+        public void run() {
+            while(contador< celdasAfectadas().size()-1){
+                metodoEspera();
+                Correr.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        contador=n;
+                        List<Integer> celdas = new ArrayList<>();
+                        if(turno==2){
+                            for(int i=0 ;i<grupos.size();i++){
+                                if(grupos.get(i).getId()==1 && grupos.get(i).getCantidad()<6){
+                                    celdas.add(grupos.get(i).getNumero());
+                                }
+                            }
+                        }
+                        else{
+                            for(int i=0 ;i<grupos.size();i++){
+                                if(grupos.get(i).getId()==2 && grupos.get(i).getCantidad()<6){
+                                    celdas.add(grupos.get(i).getNumero());
+                                }
+                            }
+                        }
+                        //Si la celda es mayor a 6
+                        if(grupos.get(celdas.get(n)).getCantidad()<6){
+                            //tengo el 90% de incrementar su valor
+                            if(porcentaje(90)){
+                                grupos.get(celdas.get(n)).setCantidad(grupos.get(celdas.get(n)).getCantidad()+1);
+                            }
+                        }
+                        n++;
+                        cargar();
+                        if(n==celdasAfectadas().size()){
+                            incrementando=false;
+                        }
+                    }
+                });
+            }
+        }
+        private void metodoEspera() {
+            try {
+                Thread.sleep(500);
+                contador++;
+            }catch (Exception e ){
 
+            }
+
+        }
+
+    }
 }
