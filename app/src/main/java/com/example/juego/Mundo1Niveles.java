@@ -2,10 +2,10 @@ package com.example.juego;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,8 +15,8 @@ import com.example.juego.clases.NivelesMundo1;
 
 import java.util.ArrayList;
 import java.util.List;
-//Multijugador
-public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListener{
+
+public class Mundo1Niveles extends AppCompatActivity implements View.OnClickListener{
 
     private List<Grupo> grupos = new ArrayList<>();
     private List<ImageButton> botones = new ArrayList<>();
@@ -24,21 +24,16 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     private int NumeroEnJuego=0;
     private int turnos;
     private int Nivel;
-    TextView t;
+    private static int contador;
+    private Handler Correr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_m_u_l_t_i_j_u_g_a_d_o_r);
-        t = findViewById(R.id.txtTurno);
+        setContentView(R.layout.activity_mundo1_niveles);
         turnos = 0;
-        if(getIntent().getStringExtra("nivel")!=null){
-            Nivel = Integer.parseInt(getIntent().getStringExtra("nivel"));
-        }
-        else {
-            Nivel=0;
-        }
+        Nivel = Integer.parseInt(getIntent().getStringExtra("nivel"));
         agregarBotones();
-        cargarGrupos();
+        cargarNivel();
         cargar();
     }
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
@@ -149,26 +144,10 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         btn34.setOnClickListener(this);
         btn35.setOnClickListener(this);
     }
-    //Genera los valores aleatorios de nuestras piezas en el tablero y los agrega en la lista "grupos" para acceder a ellos cuando querramos
-    private void cargarGrupos(){
-        if(Nivel!=0){
-            NivelesMundo1 nivel = new NivelesMundo1(Nivel);
-            grupos = nivel.getNivelesMundo1();
-        }
-        else {
-            int contador = 0;
-            for(int i = 1; i<=7; i++){
-                for(int j = 1; j <=5; j++){
-                    int id;
-                    if(porcentaje(12)) id=0;
-                    else id = (int)(Math.random() * 2) + 1;
-                    int cantidad = (int)(Math.random() * 6) + 1;
-                    Grupo g = new Grupo(id,i,j,cantidad,contador);
-                    grupos.add(g);
-                    contador++;
-                }
-            }
-        }
+    //Carga el nivel seleccionado
+    private void cargarNivel(){
+        NivelesMundo1 nivel = new NivelesMundo1(Nivel);
+        grupos = nivel.getNivelesMundo1();
     }
     //Carga las piezas en el tablero
     private void cargar(){
@@ -182,22 +161,22 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
             if(grupos.get(n1).getId()==1){
                 switch (n2){
                     case 1:
-                        botones.get(n1).setImageResource(R.drawable.fr1);
+                        botones.get(n1).setImageResource(R.drawable.m1_soldado1);
                         break;
                     case 2:
-                        botones.get(n1).setImageResource(R.drawable.fr2);
+                        botones.get(n1).setImageResource(R.drawable.m1_soldado2);
                         break;
                     case 3:
-                        botones.get(n1).setImageResource(R.drawable.fr3);
+                        botones.get(n1).setImageResource(R.drawable.m1_soldado3);
                         break;
                     case 4:
-                        botones.get(n1).setImageResource(R.drawable.fr4);
+                        botones.get(n1).setImageResource(R.drawable.m1_soldado4);
                         break;
                     case 5:
-                        botones.get(n1).setImageResource(R.drawable.fr5);
+                        botones.get(n1).setImageResource(R.drawable.m1_soldado5);
                         break;
                     case 6:
-                        botones.get(n1).setImageResource(R.drawable.fr6);
+                        botones.get(n1).setImageResource(R.drawable.m1_soldado6);
                         break;
                 }
             }
@@ -230,22 +209,22 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
             if(grupos.get(n1).getId()==1){
                 switch (n2){
                     case 1:
-                        botones.get(n1).setImageResource(R.drawable.rf1);
+                        botones.get(n1).setImageResource(R.drawable.rsoldado1);
                         break;
                     case 2:
-                        botones.get(n1).setImageResource(R.drawable.rf2);
+                        botones.get(n1).setImageResource(R.drawable.rsoldado2);
                         break;
                     case 3:
-                        botones.get(n1).setImageResource(R.drawable.rf3);
+                        botones.get(n1).setImageResource(R.drawable.rsoldado3);
                         break;
                     case 4:
-                        botones.get(n1).setImageResource(R.drawable.rf4);
+                        botones.get(n1).setImageResource(R.drawable.rsoldado4);
                         break;
                     case 5:
-                        botones.get(n1).setImageResource(R.drawable.rf5);
+                        botones.get(n1).setImageResource(R.drawable.rsoldado5);
                         break;
                     case 6:
-                        botones.get(n1).setImageResource(R.drawable.rf6);
+                        botones.get(n1).setImageResource(R.drawable.rsoldado6);
                         break;
                 }
             }
@@ -291,6 +270,7 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         }
         return retorno;
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -405,11 +385,9 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
     public void Turno_onClick(View v){
         Incrementar();
         if(turno==1) {
-            t.setText("Momias");
             turno=2;
         }
         else{
-            t.setText("Zombies");
             turno=1;
         }
         NumeroEnJuego = 0;
@@ -428,22 +406,18 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         if(x>1 && getGrupo(x-1,y).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x-1,y).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x-1,y).getNumero()).setEstado(1);
             ImagenBoton(getGrupo(x-1,y).getNumero(),getGrupo(x-1,y).getCantidad(),2);
-            //botones.get(getGrupo(x-1,y).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(x<7 && getGrupo(x+1,y).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x+1,y).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x+1,y).getNumero()).setEstado(1);
             ImagenBoton(getGrupo(x+1,y).getNumero(),getGrupo(x+1,y).getCantidad(),2);
-            //botones.get(getGrupo(x+1,y).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(y>1 && getGrupo(x,y-1).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x,y-1).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x,y-1).getNumero()).setEstado(1);
             ImagenBoton(getGrupo(x,y-1).getNumero(),getGrupo(x,y-1).getCantidad(),2);
-            //botones.get(getGrupo(x,y-1).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(y<5 && getGrupo(x,y+1).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x,y+1).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x,y+1).getNumero()).setEstado(1);
             ImagenBoton(getGrupo(x,y+1).getNumero(),getGrupo(x,y+1).getCantidad(),2);
-            //botones.get(getGrupo(x,y+1).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         grupos.get(getGrupo(x,y).getNumero()).setEstado(2);
     }
@@ -480,18 +454,18 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
 
         if(Atacante.getCantidad() > Atacado.getCantidad()){
             //Gana Atacante
-            Ganador = Atacante.getCantidad() - Atacado.getCantidad();
+            Ganador = Atacante.getCantidad() - Atacado.getCantidad()-1;
             grupos.get(n1).setId(grupos.get(n2).getId());
             grupos.get(n1).setCantidad(Ganador);
         }else if(Atacado.getCantidad() > Atacante.getCantidad()){
             //Gana Atacado
-            Ganador = Atacado.getCantidad() - Atacante.getCantidad();
+            Ganador = Atacado.getCantidad() - Atacante.getCantidad()+1;
             grupos.get(n1).setCantidad(Ganador);
         }
         else {
             if(porcentaje(50)){
-            //Gana Atacante
-            grupos.get(n1).setId(grupos.get(n2).getId());
+                //Gana Atacante
+                grupos.get(n1).setId(grupos.get(n2).getId());
             }
             Ganador = 1;
             grupos.get(n1).setCantidad(Ganador);
@@ -532,4 +506,31 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    final class Maquina implements  Runnable{
+        @Override
+        public void run() {
+            while(contador< 10){
+                metodoEspera();
+                Correr.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(Mundo1Niveles.this, String.valueOf(contador), Toast.LENGTH_SHORT).show();
+
+                        if(contador==100) {
+
+                        }
+                    }
+                });
+            }
+        }
+        private void metodoEspera() {
+            try {
+                Thread.sleep(500);
+                contador++;
+            }catch (Exception e ){
+
+            }
+
+        }
+    }
 }

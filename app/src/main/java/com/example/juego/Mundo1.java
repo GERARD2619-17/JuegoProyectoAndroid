@@ -151,7 +151,7 @@ public class Mundo1 extends AppCompatActivity implements View.OnClickListener{
                 nivelSeleccionado="";
                 break;
         }
-        Intent mundo1 = new Intent(this, MULTIJUGADOR.class);
+        Intent mundo1 = new Intent(this, Mundo1Niveles.class);
         mundo1.putExtra("nivel",nivelSeleccionado);
         startActivity(mundo1);
     }
