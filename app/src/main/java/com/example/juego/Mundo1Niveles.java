@@ -24,11 +24,18 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     private static int contador=0;
     private Handler Correr;
     private boolean incrementando=false;
+    private int Nivel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mundo1_niveles);
         this.Correr = new Handler();
+        if(getIntent().getStringExtra("nivel")!=null){
+            Nivel = Integer.parseInt(getIntent().getStringExtra("nivel"));
+        }
+        else {
+            Nivel=0;
+        }
         agregarBotones();
         cargarGrupos();
         cargar();
@@ -143,20 +150,9 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     }
     //Genera los valores aleatorios de nuestras piezas en el tablero y los agrega en la lista "grupos" para acceder a ellos cuando querramos
     private void cargarGrupos(){
-        //NivelesMundo1 nivel = new NivelesMundo1(Nivel);
-        //grupos = nivel.getNivelesMundo1();
-        int contador = 0;
-        for(int i = 1; i<=7; i++){
-            for(int j = 1; j <=5; j++){
-                int id;
-                if(porcentaje(12)) id=0;
-                else id = (int)(Math.random() * 2) + 1;
-                int cantidad = (int)(Math.random() * 6) + 1;
-                Grupo g = new Grupo(id,i,j,cantidad,contador);
-                grupos.add(g);
-                contador++;
-            }
-        }
+        NivelesMundo1 nivel = new NivelesMundo1(Nivel);
+        grupos = nivel.getNivelesMundo1();
+
     }
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     //Carga las piezas en el tablero
@@ -193,22 +189,22 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
             else if(grupos.get(n1).getId()==2){
                 switch (n2){
                     case 1:
-                        botones.get(n1).setImageResource(R.drawable.m1);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia1);
                         break;
                     case 2:
-                        botones.get(n1).setImageResource(R.drawable.m2);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia2);
                         break;
                     case 3:
-                        botones.get(n1).setImageResource(R.drawable.m3);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia3);
                         break;
                     case 4:
-                        botones.get(n1).setImageResource(R.drawable.m4);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia4);
                         break;
                     case 5:
-                        botones.get(n1).setImageResource(R.drawable.m5);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia5);
                         break;
                     case 6:
-                        botones.get(n1).setImageResource(R.drawable.m6);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia6);
                         break;
                 }
             }else{
@@ -219,44 +215,44 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
             if(grupos.get(n1).getId()==1){
                 switch (n2){
                     case 1:
-                        botones.get(n1).setImageResource(R.drawable.rsoldado1);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado1);
                         break;
                     case 2:
-                        botones.get(n1).setImageResource(R.drawable.rsoldado2);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado2);
                         break;
                     case 3:
-                        botones.get(n1).setImageResource(R.drawable.rsoldado3);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado3);
                         break;
                     case 4:
-                        botones.get(n1).setImageResource(R.drawable.rsoldado4);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado4);
                         break;
                     case 5:
-                        botones.get(n1).setImageResource(R.drawable.rsoldado5);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado5);
                         break;
                     case 6:
-                        botones.get(n1).setImageResource(R.drawable.rsoldado6);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado6);
                         break;
                 }
             }
             else if(grupos.get(n1).getId()==2){
                 switch (n2){
                     case 1:
-                        botones.get(n1).setImageResource(R.drawable.rm1);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia1);
                         break;
                     case 2:
-                        botones.get(n1).setImageResource(R.drawable.rm2);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia2);
                         break;
                     case 3:
-                        botones.get(n1).setImageResource(R.drawable.rm3);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia3);
                         break;
                     case 4:
-                        botones.get(n1).setImageResource(R.drawable.rm4);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia4);
                         break;
                     case 5:
-                        botones.get(n1).setImageResource(R.drawable.rm5);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia5);
                         break;
                     case 6:
-                        botones.get(n1).setImageResource(R.drawable.rm6);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia6);
                         break;
                 }
             }else{

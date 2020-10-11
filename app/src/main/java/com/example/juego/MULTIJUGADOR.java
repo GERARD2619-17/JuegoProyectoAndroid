@@ -208,22 +208,22 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
             else if(grupos.get(n1).getId()==2){
                 switch (n2){
                     case 1:
-                        botones.get(n1).setImageResource(R.drawable.m1);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia1);
                         break;
                     case 2:
-                        botones.get(n1).setImageResource(R.drawable.m2);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia2);
                         break;
                     case 3:
-                        botones.get(n1).setImageResource(R.drawable.m3);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia3);
                         break;
                     case 4:
-                        botones.get(n1).setImageResource(R.drawable.m4);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia4);
                         break;
                     case 5:
-                        botones.get(n1).setImageResource(R.drawable.m5);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia5);
                         break;
                     case 6:
-                        botones.get(n1).setImageResource(R.drawable.m6);
+                        botones.get(n1).setImageResource(R.drawable.m1_momia6);
                         break;
                 }
             }else{
@@ -256,22 +256,22 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
             else if(grupos.get(n1).getId()==2){
                 switch (n2){
                     case 1:
-                        botones.get(n1).setImageResource(R.drawable.rm1);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia1);
                         break;
                     case 2:
-                        botones.get(n1).setImageResource(R.drawable.rm2);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia2);
                         break;
                     case 3:
-                        botones.get(n1).setImageResource(R.drawable.rm3);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia3);
                         break;
                     case 4:
-                        botones.get(n1).setImageResource(R.drawable.rm4);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia4);
                         break;
                     case 5:
-                        botones.get(n1).setImageResource(R.drawable.rm5);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia5);
                         break;
                     case 6:
-                        botones.get(n1).setImageResource(R.drawable.rm6);
+                        botones.get(n1).setImageResource(R.drawable.m1_r_momia6);
                         break;
                 }
             }else{
