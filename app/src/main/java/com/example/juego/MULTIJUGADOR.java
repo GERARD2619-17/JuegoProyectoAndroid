@@ -573,8 +573,6 @@ public class MULTIJUGADOR extends AppCompatActivity implements View.OnClickListe
             }catch (Exception e ){
 
             }
-
         }
-
     }
 }

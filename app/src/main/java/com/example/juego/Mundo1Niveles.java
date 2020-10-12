@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juego.clases.Grupo;
+import com.example.juego.clases.Herramientas;
 import com.example.juego.clases.NivelesMundo1;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     private Handler Correr;
     private boolean incrementando=false;
     private int Nivel;
+    private boolean CPU=false;
+    private TextView texto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         agregarBotones();
         cargarGrupos();
         cargar();
+        this.texto = findViewById(R.id.txt);
     }
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     private void agregarBotones(){
@@ -261,21 +266,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         }
     }
     //Funcion que recibe un numero entre 0 y 100 (porcentaje de resultado que espero) y me devuelve true o false
-    private boolean porcentaje(int n){
-        boolean retorno;
-        int si = n;
-        int[] PORCENTAJE = new int[100];
-        for(int i=0; i<si;i++) PORCENTAJE[i] = 1;
-        for (int i=si;i<100;i++) PORCENTAJE[i] = 0;
-        int cantidad = (int)(Math.random() * 99);
-        if(PORCENTAJE[cantidad]==1){
-            retorno = true;
-        }
-        else {
-            retorno = false;
-        }
-        return retorno;
-    }
+    
     @Override
     public void onClick(View view) {
         if(incrementando==false){
@@ -391,18 +382,19 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     }
     //Boton TERMINAR TURNO
     public void Turno_onClick(View v){
+        terminar();
+    }
+    public void terminar(){
         incrementando=true;
-        //Incrementar();
-        new Thread(new cargaLenta()).start();
-        contador = 0;
         if(turno==1) {
             turno=2;
         }
         else{
             turno=1;
         }
+        cargaLenta();
+        contador = 0;
         NumeroEnJuego = 0;
-
     }
     //Pinta los espacios a los que me puedo mover
     public void Finish_onClick(View v){
@@ -417,22 +409,18 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         if(x>1 && getGrupo(x-1,y).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x-1,y).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x-1,y).getNumero()).setEstado(1);
             ImagenBoton(getGrupo(x-1,y).getNumero(),getGrupo(x-1,y).getCantidad(),2);
-            //botones.get(getGrupo(x-1,y).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(x<7 && getGrupo(x+1,y).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x+1,y).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x+1,y).getNumero()).setEstado(1);
             ImagenBoton(getGrupo(x+1,y).getNumero(),getGrupo(x+1,y).getCantidad(),2);
-            //botones.get(getGrupo(x+1,y).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(y>1 && getGrupo(x,y-1).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x,y-1).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x,y-1).getNumero()).setEstado(1);
             ImagenBoton(getGrupo(x,y-1).getNumero(),getGrupo(x,y-1).getCantidad(),2);
-            //botones.get(getGrupo(x,y-1).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         if(y<5 && getGrupo(x,y+1).getId()!=0 && getGrupo(x,y).getId()!=0 && getGrupo(x,y).getCantidad()!=1 && getGrupo(x,y+1).getId()!=getGrupo(x,y).getId() && getGrupo(x,y).getId()==turno){
             grupos.get(getGrupo(x,y+1).getNumero()).setEstado(1);
             ImagenBoton(getGrupo(x,y+1).getNumero(),getGrupo(x,y+1).getCantidad(),2);
-            //botones.get(getGrupo(x,y+1).getNumero()).setBackgroundColor(Color.rgb(0,0,255));
         }
         grupos.get(getGrupo(x,y).getNumero()).setEstado(2);
     }
@@ -478,7 +466,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
             grupos.get(n1).setCantidad(Ganador);
         }
         else {
-            if(porcentaje(50)){
+            if(Herramientas.porcentaje(50)){
                 //Gana Atacante
                 grupos.get(n1).setId(grupos.get(n2).getId());
             }
@@ -508,56 +496,72 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         return celdas;
     }
     //Incrementa las tropas en cada celda
-    final class cargaLenta implements  Runnable{
+    public void cargaLenta(){
+        int repeticiones = (celdasAfectadas().size()+1)*100;
+        final List<Integer> celdas = new ArrayList<>();
+        new CountDownTimer(repeticiones, 100) {
+            int num=0;
+            public void onTick(long millisUntilFinished) {
+                if(turno==2 && num==0){
+                    for(int i=0 ;i<grupos.size();i++){
+                        if(grupos.get(i).getId()==1 && grupos.get(i).getCantidad()<6){
+                            celdas.add(grupos.get(i).getNumero());
+                        }
+                    }
+                }
+                else if(turno==1 && num==0){
+                    for(int i=0 ;i<grupos.size();i++){
+                        if(grupos.get(i).getId()==2 && grupos.get(i).getCantidad()<6){
+                            celdas.add(grupos.get(i).getNumero());
+                        }
+                    }
+                }
+                //Si la celda es mayor a 6
+                if(grupos.get(celdas.get(num)).getCantidad()<6){
+                    //tengo el 90% de incrementar su valor
+                    if(Herramientas.porcentaje(90)){
+                        grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                    }
+                }
+                num++;
+                cargar();
+            }
+            public void onFinish() {
+                incrementando=false;
+                if(turno==2){
+                    new Thread(new Ultron()).start();
+                }
+            }
+
+        }.start();
+    }
+
+    final class Ultron implements Runnable{
         int n=0;
+        boolean seguir=true;
+        //run ejecuta el proceso secundario que queremos hacer
         @Override
         public void run() {
-            while(contador< celdasAfectadas().size()-1){
+            while(seguir){
+                //Metodo de espera
                 metodoEspera();
                 Correr.post(new Runnable() {
                     @Override
                     public void run() {
-                        contador=n;
-                        List<Integer> celdas = new ArrayList<>();
-                        if(turno==2){
-                            for(int i=0 ;i<grupos.size();i++){
-                                if(grupos.get(i).getId()==1 && grupos.get(i).getCantidad()<6){
-                                    celdas.add(grupos.get(i).getNumero());
-                                }
-                            }
-                        }
-                        else{
-                            for(int i=0 ;i<grupos.size();i++){
-                                if(grupos.get(i).getId()==2 && grupos.get(i).getCantidad()<6){
-                                    celdas.add(grupos.get(i).getNumero());
-                                }
-                            }
-                        }
-                        //Si la celda es mayor a 6
-                        if(grupos.get(celdas.get(n)).getCantidad()<6){
-                            //tengo el 90% de incrementar su valor
-                            if(porcentaje(90)){
-                                grupos.get(celdas.get(n)).setCantidad(grupos.get(celdas.get(n)).getCantidad()+1);
-                            }
+                        texto.setText(Integer.toString(n));
+                        if(n==5){
+                            seguir=false;
+                            terminar();
                         }
                         n++;
-                        cargar();
-                        if(n==celdasAfectadas().size()){
-                            incrementando=false;
-                        }
                     }
                 });
             }
         }
         private void metodoEspera() {
-            try {
-                Thread.sleep(500);
-                contador++;
-            }catch (Exception e ){
-
-            }
-
+            try{
+                Thread.sleep(1000);
+            }catch (Exception e){}
         }
-
     }
 }
