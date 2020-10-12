@@ -163,7 +163,7 @@ public class NivelesMundo1 {
     }
     public List<Grupo> nivel3(){
         List<Grupo> Level = new ArrayList<>();
-        Level.add(new Grupo(0,0,0,0,0));
+        Level.add(new Grupo(1,0,0,2,0));
         Level.add(new Grupo(0,0,1,0,1));
         Level.add(new Grupo(0,0,2,0,2));
         Level.add(new Grupo(0,0,3,0,3));
