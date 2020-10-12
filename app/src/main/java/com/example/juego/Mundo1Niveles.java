@@ -495,6 +495,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         }
         return celdas;
     }
+    //
     //Incrementa las tropas en cada celda
     public void cargaLenta(){
         int repeticiones = (celdasAfectadas().size()+1)*100;
