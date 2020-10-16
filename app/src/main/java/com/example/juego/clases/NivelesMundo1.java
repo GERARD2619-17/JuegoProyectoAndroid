@@ -864,3 +864,5 @@ public class NivelesMundo1 {
         return Level;
     }
 }
+
+//Niveles ya echos, nota el nivel 20, tiene 1 de diferencia entre las tropas y las enemigas, significa que se gana por 1
