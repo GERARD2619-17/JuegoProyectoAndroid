@@ -10,6 +10,7 @@ import com.example.juego.clases.ProgressBarAnimation;
 
 public class SplashScreen extends AppCompatActivity {
     ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +19,7 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         progressBar = findViewById(R.id.progrees_bar);
-
+// el maximo de carga del progress
         progressBar.setMax(100);
         progressBar.setScaleY(3f);
 
