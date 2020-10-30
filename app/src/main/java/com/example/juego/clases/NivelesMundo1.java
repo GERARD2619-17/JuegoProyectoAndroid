@@ -83,6 +83,7 @@ public class NivelesMundo1 {
     //Niveles:
     //I: 0 -> cuadro azul, I: 1 -> Humano, I: 2 -> Momia
     //C: cantidad > 1 y cantidad < 6
+
     public List<Grupo> nivel1(){
         List<Grupo> Level = new ArrayList<>();
         Level.add(new Grupo(0,0,0,0,0));

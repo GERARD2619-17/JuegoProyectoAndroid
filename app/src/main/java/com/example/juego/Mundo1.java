@@ -158,4 +158,20 @@ public class Mundo1 extends AppCompatActivity implements View.OnClickListener{
         mundo1.putExtra("nivel",nivelSeleccionado);
         startActivity(mundo1);
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        //pausar();
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action",AudioService.PAUSE);
+        startService(i);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action", AudioService.START);
+        startService(i);
+    }
 }

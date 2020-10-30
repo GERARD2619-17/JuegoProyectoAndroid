@@ -4,25 +4,40 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_iconjuego"
+        android:icon="@mipmap/ic_launcher_icono_juego"
         android:label="Monsterapp"
-        android:roundIcon="@mipmap/ic_launcher_iconjuego"
+        android:roundIcon="@mipmap/ic_launcher_icono_juego"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SplashScreen" android:screenOrientation="portrait">
+        <service
+            android:name=".AudioService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity
+            android:name=".SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Mundo1Niveles" android:screenOrientation="portrait" />
-        <activity android:name=".Mundo1" android:screenOrientation="portrait" />
-        <activity android:name=".PantallaMenuDos" android:screenOrientation="portrait"/>
-        <activity android:name=".MULTIJUGADOR" android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
-
-
+        <activity
+            android:name=".Mundo1Niveles"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Mundo1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PantallaMenuDos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MULTIJUGADOR"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
