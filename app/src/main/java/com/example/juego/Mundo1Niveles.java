@@ -530,6 +530,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
             public void onFinish() {
                 incrementando=false;
                 if(turno==2){
+                    incrementando=true;
                     new Thread(new Ultron()).start();
                 }
             }
@@ -537,8 +538,60 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         }.start();
     }
 
+    public boolean Seleccionador(){
+        boolean aceptar = true;
+        List<Integer> gruposEnJuego = new ArrayList<>();
+        for(int i=0;i<35;i++){
+            if(grupos.get(i).getId()==2 && grupos.get(i).getCantidad()>1){
+                gruposEnJuego.add(grupos.get(i).getNumero());
+            }
+        }
+        boolean seguir2=true;
+        int i=0;
+        do{
+            //Si no esta en la primera fila y la celda que esta arriba es del equipo contrario y el numero es mayor al numero que esta abajo
+            if(grupos.get(gruposEnJuego.get(i)).getPosX()>0 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()){
+                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                seguir2=false;
+            }
+            //Si no esta en la ultima fila y la celda que esta abajo es del equipo contrario y el numero es mayor al numero que esta arriba
+            else if(grupos.get(gruposEnJuego.get(i)).getPosX()<6 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()){
+                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                seguir2=false;
+            }
+            //Si no esta en la primera columna y la columna que esta a la izquierda es del equipo contrario y el numero es mayor al numero que esta a la izquierda
+            else if(grupos.get(gruposEnJuego.get(i)).getPosY()>0 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getCantidad()){
+                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getNumero());
+                seguir2=false;
+            }
+            //Si no esta en la ultima columna y la columna que esta a la derecha es del equipo contrario y el numero es mayor al numero que esta a la derecha
+            else if(grupos.get(gruposEnJuego.get(i)).getPosY()<4 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getCantidad()){
+                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getNumero());
+                seguir2=false;
+            }
+            i++;
+
+        }while (seguir2 && i<gruposEnJuego.size());
+        if(i==gruposEnJuego.size() && seguir2){
+            aceptar=false;
+        }
+        return aceptar;
+    }
     final class Ultron implements Runnable{
         boolean seguir=true;
+        int j=0;
         //run ejecuta el proceso secundario que queremos hacer
         @Override
         public void run() {
@@ -548,53 +601,16 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
                 Correr.post(new Runnable() {
                     @Override
                     public void run() {
-                        List<Integer> gruposEnJuego = new ArrayList<>();
-                        for(int i=0;i<35;i++){
-                            if(grupos.get(i).getId()==2 && grupos.get(i).getCantidad()>1){
-                                gruposEnJuego.add(grupos.get(i).getNumero());
-                            }
-                        }
-                        for(int i=0; i<gruposEnJuego.size();i++){
-                            //Si no esta en la primera fila y la celda que esta arriba es del equipo contrario y el numero es mayor al numero que esta arriba
-                            if(grupos.get(gruposEnJuego.get(i)).getPosX()>0 &&
-                                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1 &&
-                                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()){
-                                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                                break;
-                            }
-                            //Si no esta en la ultima fila y la celda que esta abajo es del equipo contrario y el numero es mayor al numero que esta arriba
-                            else if(grupos.get(gruposEnJuego.get(i)).getPosX()<6 &&
-                                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1 &&
-                                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()){
-                                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                                break;
-                            }
-                            //Si no esta en la primera columna y la columna que esta a la izquierda es del equipo contrario y el numero es mayor al numero que esta a la izquierda
-                            else if(grupos.get(gruposEnJuego.get(i)).getPosY()>0 &&
-                                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getId()==1 &&
-                                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getCantidad()){
-                                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getNumero());
-                                break;
-                            }
-                            //Si no esta en la ultima columna y la columna que esta a la derecha es del equipo contrario y el numero es mayor al numero que esta a la derecha
-                            else if(grupos.get(gruposEnJuego.get(i)).getPosY()<4 &&
-                                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getId()==1 &&
-                                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getCantidad()){
-                                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                                Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getNumero());
-                                break;
-                            }
-                            if(i==gruposEnJuego.size()-1){
+                        if(!Seleccionador()){
+                            seguir=false;
+                            j++;
+                            if(j==1){
                                 terminar();
-                                seguir=false;
                             }
                         }
-
                     }
                 });
+
             }
         }
         private void metodoEspera() {
@@ -602,5 +618,6 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
                 Thread.sleep(1000);
             }catch (Exception e){}
         }
+
     }
 }

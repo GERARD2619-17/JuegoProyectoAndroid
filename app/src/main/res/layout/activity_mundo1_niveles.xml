@@ -490,6 +490,7 @@ tools:context=".Mundo1Niveles">
                     app:srcCompat="@drawable/fr1" />
             </LinearLayout>
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
 

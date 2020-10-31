@@ -47,7 +47,7 @@
             app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.32999998" />
+            app:layout_constraintVertical_bias="0.325" />
 
         <Button
             android:id="@+id/btnsalir"
@@ -58,7 +58,6 @@
             android:layout_marginEnd="50dp"
             android:alpha="0.80"
             android:background="@drawable/custom_button"
-            android:onClick="Salir_onClick"
             android:text="@string/btnSalir"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
