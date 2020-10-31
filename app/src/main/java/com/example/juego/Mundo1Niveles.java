@@ -537,7 +537,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
 
         }.start();
     }
-
+//
     public boolean Seleccionador(){
         boolean aceptar = true;
         List<Integer> gruposEnJuego = new ArrayList<>();
