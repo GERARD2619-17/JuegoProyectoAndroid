@@ -27,8 +27,6 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     private Handler Correr;
     private boolean incrementando=false;
     private int Nivel;
-    private boolean CPU=false;
-    private TextView texto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +41,6 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         agregarBotones();
         cargarGrupos();
         cargar();
-        this.texto = findViewById(R.id.txt);
     }
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     private void agregarBotones(){

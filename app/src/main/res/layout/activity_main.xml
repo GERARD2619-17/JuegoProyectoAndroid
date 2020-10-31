@@ -14,7 +14,7 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="240dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
@@ -23,7 +23,7 @@
             android:background="@drawable/custom_button"
             android:onClick="MULTIJUGADOR_onClick"
             android:text="@string/btnMultijugador"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/background_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="240dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="40dp"
@@ -41,7 +41,7 @@
             android:background="@drawable/custom_button"
             android:onClick="AVENTURA_onClick"
             android:text="@string/btnAvetura"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/background_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.507"
@@ -51,7 +51,7 @@
 
         <Button
             android:id="@+id/btnsalir"
-            android:layout_width="240dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
@@ -59,7 +59,7 @@
             android:alpha="0.80"
             android:background="@drawable/custom_button"
             android:text="@string/btnSalir"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/background_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
