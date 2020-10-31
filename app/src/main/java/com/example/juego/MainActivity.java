@@ -34,4 +34,20 @@ public class MainActivity extends AppCompatActivity {
         Intent aventura = new Intent(this, Mundo1.class);
         startActivity(aventura);
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        //pausar();
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action",AudioService.PAUSE);
+        startService(i);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action", AudioService.START);
+        startService(i);
+    }
 }

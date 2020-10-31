@@ -4,22 +4,40 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher_icono_juego"
+        android:label="Monsterapp"
+        android:roundIcon="@mipmap/ic_launcher_icono_juego"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Mundo1Niveles"></activity>
-        <activity android:name=".Mundo1" />
-        <activity android:name=".PantallaMenuDos" />
-        <activity android:name=".MULTIJUGADOR" />
-        <activity android:name=".MainActivity">
+        <service
+            android:name=".AudioService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity
+            android:name=".SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Mundo1Niveles"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Mundo1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PantallaMenuDos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MULTIJUGADOR"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

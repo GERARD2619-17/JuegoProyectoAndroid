@@ -20,7 +20,10 @@ public class Mundo1 extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_mundo1);
         agregarBotones();
     }
-
+    public void Atras_onClick(View v){
+        Intent atras = new Intent(this, MainActivity.class);
+        startActivity(atras);
+    }
     private void agregarBotones(){
         ImageButton btn1 = findViewById(R.id.m1_btn1);
         botones.add(btn1);
@@ -154,5 +157,21 @@ public class Mundo1 extends AppCompatActivity implements View.OnClickListener{
         Intent mundo1 = new Intent(this, Mundo1Niveles.class);
         mundo1.putExtra("nivel",nivelSeleccionado);
         startActivity(mundo1);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        //pausar();
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action",AudioService.PAUSE);
+        startService(i);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent i = new Intent(this, AudioService.class);
+        i.putExtra("action", AudioService.START);
+        startService(i);
     }
 }
