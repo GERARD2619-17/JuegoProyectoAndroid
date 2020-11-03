@@ -27,6 +27,8 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     private Handler Correr;
     private boolean incrementando=false;
     private int Nivel;
+    private int N;
+    private int accion=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         else {
             Nivel=0;
         }
+        N=0;
         agregarBotones();
         cargarGrupos();
         cargar();
@@ -154,7 +157,6 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     private void cargarGrupos(){
         NivelesMundo1 nivel = new NivelesMundo1(Nivel);
         grupos = nivel.getNivelesMundo1();
-
     }
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     //Carga las piezas en el tablero
@@ -214,51 +216,53 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
             }
         }
         else{
-            if(grupos.get(n1).getId()==1){
-                switch (n2){
-                    case 1:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado1);
-                        break;
-                    case 2:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado2);
-                        break;
-                    case 3:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado3);
-                        break;
-                    case 4:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado4);
-                        break;
-                    case 5:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado5);
-                        break;
-                    case 6:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_soldado6);
-                        break;
+            if(accion==1){
+                if(grupos.get(n1).getId()==1){
+                    switch (n2){
+                        case 1:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_soldado1);
+                            break;
+                        case 2:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_soldado2);
+                            break;
+                        case 3:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_soldado3);
+                            break;
+                        case 4:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_soldado4);
+                            break;
+                        case 5:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_soldado5);
+                            break;
+                        case 6:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_soldado6);
+                            break;
+                    }
                 }
-            }
-            else if(grupos.get(n1).getId()==2){
-                switch (n2){
-                    case 1:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_momia1);
-                        break;
-                    case 2:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_momia2);
-                        break;
-                    case 3:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_momia3);
-                        break;
-                    case 4:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_momia4);
-                        break;
-                    case 5:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_momia5);
-                        break;
-                    case 6:
-                        botones.get(n1).setImageResource(R.drawable.m1_r_momia6);
-                        break;
+                else if(grupos.get(n1).getId()==2){
+                    switch (n2){
+                        case 1:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_momia1);
+                            break;
+                        case 2:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_momia2);
+                            break;
+                        case 3:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_momia3);
+                            break;
+                        case 4:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_momia4);
+                            break;
+                        case 5:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_momia5);
+                            break;
+                        case 6:
+                            botones.get(n1).setImageResource(R.drawable.m1_r_momia6);
+                            break;
+                    }
+                }else{
+                    botones.get(n1).setImageResource(R.drawable.n);
                 }
-            }else{
-                botones.get(n1).setImageResource(R.drawable.n);
             }
         }
     }
@@ -266,6 +270,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     
     @Override
     public void onClick(View view) {
+        accion=1;
         if(incrementando==false){
             switch (view.getId()){
                 case R.id.btn1:
@@ -382,6 +387,9 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         terminar();
     }
     public void terminar(){
+        if(N<10){
+            N++;
+        }
         incrementando=true;
         if(turno==1) {
             turno=2;
@@ -392,6 +400,7 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         cargaLenta();
         contador = 0;
         NumeroEnJuego = 0;
+        cargar();
     }
     //Pinta los espacios a los que me puedo mover
     public void Finish_onClick(View v){
@@ -495,15 +504,21 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     //
     //Incrementa las tropas en cada celda
     public void cargaLenta(){
+        accion=0;
         int repeticiones = (celdasAfectadas().size()+1)*100;
         final List<Integer> celdas = new ArrayList<>();
         new CountDownTimer(repeticiones, 100) {
             int num=0;
             public void onTick(long millisUntilFinished) {
+                int numeroDeIncremento=0;
+
                 if(turno==2 && num==0){
                     for(int i=0 ;i<grupos.size();i++){
                         if(grupos.get(i).getId()==1 && grupos.get(i).getCantidad()<6){
                             celdas.add(grupos.get(i).getNumero());
+                        }
+                        if(grupos.get(i).getId()==1){
+                            numeroDeIncremento++;
                         }
                     }
                 }
@@ -512,12 +527,290 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
                         if(grupos.get(i).getId()==2 && grupos.get(i).getCantidad()<6){
                             celdas.add(grupos.get(i).getNumero());
                         }
+                        if(grupos.get(i).getId()==2){
+                            numeroDeIncremento++;
+                        }
                     }
                 }
-                //Si la celda es mayor a 6
-                if(grupos.get(celdas.get(num)).getCantidad()<6){
-                    //tengo el 90% de incrementar su valor
+                int vacios=0;
+                for(int i=0 ;i<grupos.size();i++){
+                    if(grupos.get(i).getId()==0){
+                        vacios++;
+                    }
+                }
+                int cuartaParte=(35-vacios)/4;
+                //Si es el primer incremento
+                if(N>=1 && N<=2){
                     if(Herramientas.porcentaje(90)){
+                        grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                    }
+                }
+                //Si es el segundo incremento
+                else if(N>=3 && N<=4){
+                    if(grupos.get(celdas.get(num)).getCantidad()<=4){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(30)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+                        //Si va nivelado
+                        else if(numeroDeIncremento>cuartaParte && numeroDeIncremento<(cuartaParte*3)){
+                            if(Herramientas.porcentaje(20)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+                        //Si va ganando
+                        else if(numeroDeIncremento>(cuartaParte*3)){
+                            if(Herramientas.porcentaje(10)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+                    }
+                    else {
+                        grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                    }
+                }
+                //Si es el tercer incremento
+                else if(N>=5 && N<=6){
+                    if(grupos.get(celdas.get(num)).getCantidad()<=3){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(30)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else if (Herramientas.porcentaje(60)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else {
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }
+                        }
+                        //Si va nivelado
+                        else if(numeroDeIncremento>cuartaParte && numeroDeIncremento<(cuartaParte*3)){
+                            if(Herramientas.porcentaje(20)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }
+                        }
+                        //Si va ganando
+                        else if(numeroDeIncremento>(cuartaParte*3)){
+                            if(Herramientas.porcentaje(10)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }
+                        }
+                    }
+                    else if(grupos.get(celdas.get(num)).getCantidad()==4){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(40)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+                        //Si va nivelado o ganando
+                        else{
+                            if(Herramientas.porcentaje(30)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+
+                    }
+                    else {
+                        grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                    }
+                }
+                //Si es el cuarto intento
+                else if(N>=7 && N<=8){
+                    if(grupos.get(celdas.get(num)).getCantidad()==1){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(40)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else if(Herramientas.porcentaje(50)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else if(Herramientas.porcentaje(60)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }else if(Herramientas.porcentaje(70)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }else {
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+5);
+                            }
+                        }
+                        //Si va nivelado
+                        else if(numeroDeIncremento>cuartaParte && numeroDeIncremento<(cuartaParte*3)){
+                            if(Herramientas.porcentaje(70)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }else if(Herramientas.porcentaje(70)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }else {
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+5);
+                            }
+                        }
+                        //Si va ganando
+                        else if(numeroDeIncremento>(cuartaParte*3)){
+                            if(Herramientas.porcentaje(70)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+5);
+                            }
+                        }
+                    }
+                    else if (grupos.get(celdas.get(num)).getCantidad()==2){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(40)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else if(Herramientas.porcentaje(50)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else if(Herramientas.porcentaje(60)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }
+                        }
+                        //Si va nivelado o ganando
+                        else{
+                            if(Herramientas.porcentaje(70)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }
+                        }
+                    }
+                    else if(grupos.get(celdas.get(num)).getCantidad()==3){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(40)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else if(Herramientas.porcentaje(50)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }
+                        }
+                        //Si va nivelado o ganando
+                        else{
+                            if(Herramientas.porcentaje(20)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }
+                        }
+                    }
+                    else if(grupos.get(celdas.get(num)).getCantidad()==4){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(40)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+                        //Si va nivelado o ganando
+                        else{
+                            if(Herramientas.porcentaje(20)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+                    }
+                    else {
+                        grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                    }
+                }
+                //Si es el quinto intento
+                else {
+                    if(grupos.get(celdas.get(num)).getCantidad()==1){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(30)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else if(Herramientas.porcentaje(40)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }else if(Herramientas.porcentaje(50)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }else {
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+5);
+                            }
+                        }
+                        //Si va nivelado o ganando
+                        else{
+                            if(Herramientas.porcentaje(10)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }else {
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+5);
+                            }
+                        }
+                    }
+                    else if (grupos.get(celdas.get(num)).getCantidad()==2){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(40)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else if(Herramientas.porcentaje(50)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }
+                        }
+                        //Si va nivelado o ganando
+                        else{
+                            if(Herramientas.porcentaje(20)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+4);
+                            }
+                        }
+                    }
+                    else if(grupos.get(celdas.get(num)).getCantidad()==3){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(50)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }
+                        }
+                        //Si va nivelado o ganando
+                        else{
+                            if(Herramientas.porcentaje(10)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+3);
+                            }
+                        }
+                    }
+                    else if(grupos.get(celdas.get(num)).getCantidad()==4){
+                        //Si va perdiendo
+                        if(numeroDeIncremento<cuartaParte){
+                            if(Herramientas.porcentaje(50)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+                        //Si va nivelado o ganando
+                        else{
+                            if(Herramientas.porcentaje(10)){
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
+                            }else{
+                                grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+2);
+                            }
+                        }
+                    }
+                    else {
                         grupos.get(celdas.get(num)).setCantidad(grupos.get(celdas.get(num)).getCantidad()+1);
                     }
                 }
@@ -525,6 +818,9 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
                 cargar();
             }
             public void onFinish() {
+                cargar();
+                contador = 0;
+                NumeroEnJuego = 0;
                 incrementando=false;
                 if(turno==2){
                     incrementando=true;
@@ -602,6 +898,9 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
                             seguir=false;
                             j++;
                             if(j==1){
+                                cargar();
+                                contador = 0;
+                                NumeroEnJuego = 0;
                                 terminar();
                             }
                         }
@@ -617,4 +916,6 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         }
 
     }
+
+
 }
