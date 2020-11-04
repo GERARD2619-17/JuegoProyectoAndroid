@@ -2,7 +2,9 @@ package com.example.juego;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -29,6 +31,9 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     private int Nivel;
     private int N;
     private int accion=0;
+    private SharedPreferences Desbloqueados;
+    public static final String ARCHIVO = "archivo";
+    public static final String KEY = "llave";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,10 +166,15 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     //Carga e inicaliza los botones, en un metodo y luego los agrega en una lista "botones" para acceder a ellos cuando querramos
     //Carga las piezas en el tablero
     private void cargar(){
+        int contar=0;
         for (int i=0;i<35;i++){
             grupos.get(i).setEstado(0);
             ImagenBoton(i,grupos.get(i).getCantidad(),1);
+            if(grupos.get(i).getId()==0){
+                contar++;
+            }
         }
+
     }
     private void ImagenBoton(int n1, int n2, int n3){
         if(n3==1){
@@ -842,77 +852,72 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         boolean seguir2=true;
         int i=0;
         do{
-            //Si no esta en la primera fila y la celda que esta arriba es del equipo contrario
-            if(grupos.get(gruposEnJuego.get(i)).getPosX()>0 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1){
-                //Si el numero es mayor al numero que esta abajo
-                if(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()) {
+            //Si no esta en la primera fila y la celda que esta arriba es del equipo contrario y el numero es mayor al numero que esta abajo
+            if(grupos.get(gruposEnJuego.get(i)).getPosX()>0 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1 &&
+                getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()) {
+                    Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                    Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX() - 1, grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                    seguir2 = false;
+            }
+            //Si no esta en la ultima fila y la celda que esta abajo es del equipo contrario y el numero es mayor al numero que esta arriba
+            else if(grupos.get(gruposEnJuego.get(i)).getPosX()<6 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()) {
+                    Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                    Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX() + 1, grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                    seguir2 = false;
+            }
+            //Si no esta en la primera columna y la columna que esta a la izquierda es del equipo contrario y el numero es mayor al numero que esta a la izquierda
+            else if(grupos.get(gruposEnJuego.get(i)).getPosY()>0 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getCantidad()) {
+                    Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                    Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY() - 1).getNumero());
+                    seguir2 = false;
+            }
+            //Si no esta en la ultima columna y la columna que esta a la derecha es del equipo contrario y el numero es mayor al numero que esta a la derecha
+            else if(grupos.get(gruposEnJuego.get(i)).getPosY()<4 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getCantidad()) {
+                    Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
+                    Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY() + 1).getNumero());
+                    seguir2 = false;
+            }
+
+            //Si no esta en la primera fila y la celda que esta arriba es del equipo contrario y el numero es igual al numero que esta abajo
+            else if(grupos.get(gruposEnJuego.get(i)).getPosX()>0 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() == getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()) {
+                if(Herramientas.porcentaje(50)){
                     Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
                     Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX() - 1, grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
                     seguir2 = false;
                 }
-                //Si el numero es igual al numero que esta abajo
-                else if(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() == getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()-1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()){
-                    //Hay un 50% de probabilidad que juegue
-                    if(Herramientas.porcentaje(50)){
-                        Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                        Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX() - 1, grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                        seguir2 = false;
-                    }
-                }
             }
-            //Si no esta en la ultima fila y la celda que esta abajo es del equipo contrario
-            else if(grupos.get(gruposEnJuego.get(i)).getPosX()<6 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1){
-                //Si el numero es mayor al numero que esta arriba
-                if(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()) {
+            //Si no esta en la ultima fila y la celda que esta abajo es del equipo contrario y el numero es igual al numero que esta arriba
+            else if(grupos.get(gruposEnJuego.get(i)).getPosX()<6 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() == getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()) {
+                if(Herramientas.porcentaje(50)){
                     Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
                     Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX() + 1, grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
                     seguir2 = false;
                 }
-                //Si el numero es igual al numero que esta arriba
-                else if(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() == getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX()+1,grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad()){
-                    //Hay un 50% de probabilidad que juegue
-                    if(Herramientas.porcentaje(50)) {
-                        Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                        Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX() + 1, grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                        seguir2 = false;
-                    }
-                }
             }
-            //Si no esta en la primera columna y la columna que esta a la izquierda es del equipo contrario
-            else if(grupos.get(gruposEnJuego.get(i)).getPosY()>0 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getId()==1){
-                //Si el numero es mayor al numero que esta a la izquierda
-                if(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getCantidad()) {
+            //Si no esta en la primera columna y la columna que esta a la izquierda es del equipo contrario y el numero es igual al numero que esta a la izquierda
+            else if(grupos.get(gruposEnJuego.get(i)).getPosY()>0 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() == getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getCantidad()) {
+                if(Herramientas.porcentaje(50)){
                     Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
                     Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY() - 1).getNumero());
                     seguir2 = false;
                 }
-                //Si el numero es igual al numero que esta a la izquierda
-                else if(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() == getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()-1).getCantidad()){
-                    if(Herramientas.porcentaje(50)){
-                        Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                        Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY() - 1).getNumero());
-                        seguir2 = false;
-                    }
-                }
             }
-            //Si no esta en la ultima columna y la columna que esta a la derecha es del equipo contrario
-            else if(grupos.get(gruposEnJuego.get(i)).getPosY()<4 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getId()==1){
-                //Si el numero es mayor al numero que esta a la derecha
-                if(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() > getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getCantidad()) {
+            //Si no esta en la ultima columna y la columna que esta a la derecha es del equipo contrario y el numero es igual al numero que esta a la derecha
+            else if(grupos.get(gruposEnJuego.get(i)).getPosY()<4 && getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getId()==1 &&
+                    getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() == getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getCantidad()) {
+                if(Herramientas.porcentaje(50)) {
                     Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
                     Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY() + 1).getNumero());
                     seguir2 = false;
                 }
-                //Si el numero es igual al numero que esta a la derecha
-                else if(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()).getCantidad() == getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(),grupos.get(gruposEnJuego.get(i)).getPosY()+1).getCantidad()) {
-                    //Hay un 50% de probabilidad que juegue
-                    if(Herramientas.porcentaje(50)) {
-                        Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY()).getNumero());
-                        Jugar(getGrupo(grupos.get(gruposEnJuego.get(i)).getPosX(), grupos.get(gruposEnJuego.get(i)).getPosY() + 1).getNumero());
-                        seguir2 = false;
-                    }
-                }
             }
+
             i++;
 
         }while (seguir2 && i<gruposEnJuego.size());
@@ -955,5 +960,8 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
         }
 
     }
-
+    public void Ganador(){
+        Intent intent = new Intent(this, Ganador.class);
+        startActivity(intent);
+    }
 }
