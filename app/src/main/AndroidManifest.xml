@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_icono_juego"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".Configuracion"></activity>
         <activity
             android:name=".Ganador"
-            android:theme="@style/AppTheme.NoTitleDialog"/>
+            android:theme="@style/AppTheme.NoTitleDialog" />
 
         <service
             android:name=".AudioService"

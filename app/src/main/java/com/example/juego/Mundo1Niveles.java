@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -31,14 +32,15 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     private int Nivel;
     private int N;
     private int accion=0;
+    private boolean fin;
     private SharedPreferences Desbloqueados;
-    public static final String ARCHIVO = "archivo";
-    public static final String KEY = "llave";
     public boolean jugando;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mundo1_niveles);
+        this.Desbloqueados = getSharedPreferences(Mundo1.ARCHIVO,MODE_PRIVATE);
+        fin=false;
         this.jugando = true;
         this.Correr = new Handler();
         if(getIntent().getStringExtra("nivel")!=null){
@@ -976,7 +978,32 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
 
     }
     public void Ganador(){
+        int niveles_superados;
+        if(this.Desbloqueados!=null){
+            niveles_superados = Integer.parseInt(Desbloqueados.getString(Mundo1.KEY,""))+1;
+            if(Nivel == niveles_superados){
+                SharedPreferences.Editor editor = this.Desbloqueados.edit();
+                editor.putString(Mundo1.KEY,Integer.toString(niveles_superados));
+                if(editor.commit()){
+                    Log.d("TAG","Informacion guardada");
+                }else {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
         Intent intent = new Intent(this, Ganador.class);
+        intent.putExtra("nivel",Integer.toString(Nivel));
         startActivity(intent);
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        fin = true;
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(fin)
+        finish();
     }
 }
