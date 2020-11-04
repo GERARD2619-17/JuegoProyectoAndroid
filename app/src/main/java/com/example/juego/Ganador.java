@@ -24,9 +24,13 @@ public class Ganador extends AppCompatActivity {
         finish();
     }
     public void niveles_onClick(View v){
-
+        finish();
     }
     public void siguiente_onClick(View v){
-
+        Intent mundo1 = new Intent(this, Mundo1Niveles.class);
+        int nivelProximo = Integer.parseInt(getIntent().getStringExtra("nivel"))+1;
+        mundo1.putExtra("nivel",Integer.toString(nivelProximo));
+        startActivity(mundo1);
+        finish();
     }
 }
