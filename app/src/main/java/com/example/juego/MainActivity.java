@@ -3,15 +3,23 @@ package com.example.juego;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView titulo;
+    private Typeface Letra;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String fuente = "fuentes/Zombies3.ttf";
+        this.Letra = Typeface.createFromAsset(getAssets(),fuente);
+        titulo = (TextView) findViewById(R.id.txtMenuPrincipal);
+        titulo.setTypeface(Letra);
     }
     public void MULTIJUGADOR_onClick(View v){
         Intent multijugador = new Intent(this, PantallaMenuDos.class);

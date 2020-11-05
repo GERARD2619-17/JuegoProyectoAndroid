@@ -3,19 +3,23 @@ package com.example.juego;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 public class Ganador extends AppCompatActivity {
-    TextView txtTitulo;
-
+    private TextView txtTitulo;
+    private Typeface Letra;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ganador);
         this.txtTitulo = findViewById(R.id.txtTitulo);
+        String fuente = "fuentes/Momias.otf";
+        this.Letra = Typeface.createFromAsset(getAssets(),fuente);
         txtTitulo.setText("Victoria!");
+        txtTitulo.setTypeface(Letra);
     }
     public void recargar_onClick(View v){
         Intent mundo1 = new Intent(this, Mundo1Niveles.class);

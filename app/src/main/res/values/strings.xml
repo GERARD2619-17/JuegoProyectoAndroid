@@ -9,7 +9,7 @@
     <string name="btnAtras1">Atras</string>
     <string name="Configuracion">Configuracion</string>
     //pantalla 2
-    <string name="txtMenuseleccion">Menu de Juego</string>
+    <string name="txtMenuseleccion">Menu principal</string>
     <string name="btnonline">ORDENADOR</string>
     <string name="btnvspersonas">P VS P</string>
     <string name="btnAtras">ATRAS</string>
