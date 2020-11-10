@@ -33,8 +33,9 @@ public class Mundo1 extends AppCompatActivity implements View.OnClickListener{
         habilitarNiveles();
     }
     public void Atras_onClick(View v){
-        Intent atras = new Intent(this, MainActivity.class);
-        startActivity(atras);
+        //Intent atras = new Intent(this, MainActivity.class);
+        //startActivity(atras);
+        finish();
     }
     private void agregarBotones(){
         ImageButton btn1 = findViewById(R.id.m1_btn1);

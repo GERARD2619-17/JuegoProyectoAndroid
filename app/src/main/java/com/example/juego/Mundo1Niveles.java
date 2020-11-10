@@ -414,7 +414,9 @@ public class Mundo1Niveles extends AppCompatActivity implements View.OnClickList
     }
     //Boton TERMINAR TURNO
     public void Turno_onClick(View v){
-        terminar();
+        if(incrementando==false) {
+            terminar();
+        }
     }
     public void terminar(){
         if(N<10){

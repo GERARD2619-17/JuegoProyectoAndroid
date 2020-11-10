@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //Aventura
     public void AVENTURA_onClick(View v){
-        Intent aventura = new Intent(this, Mundo1.class);
+        Intent aventura = new Intent(this, SelectorMundos.class);
         startActivity(aventura);
     }
     public void CONFIGURACION_onClick(View v){
