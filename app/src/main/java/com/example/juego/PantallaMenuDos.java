@@ -13,6 +13,7 @@ public class PantallaMenuDos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_menu_dos);
     }
+    //botones
     public void VSPersonas_onClick(View v){
         Intent vspersonas = new Intent(this, MULTIJUGADOR.class);
         startActivity(vspersonas);
@@ -21,5 +22,5 @@ public class PantallaMenuDos extends AppCompatActivity {
         Intent retroceder = new Intent(this, MainActivity.class);
         startActivity(retroceder);
     }
-  
+
 }
