@@ -23,7 +23,9 @@ public class AudioService extends Service {
         if(loop == null){
             loop = MediaPlayer.create(this, R.raw.juegoguerra);
         }
-        if(!loop.isPlaying()){
+        if (loop.isPlaying()){
+            loop.pause();
+        }else{
             loop.setLooping(true);
             loop.start();
         }

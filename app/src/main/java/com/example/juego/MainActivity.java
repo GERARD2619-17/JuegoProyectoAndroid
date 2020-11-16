@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Intent configuracion = new Intent(this, Configuracion.class);
         startActivity(configuracion);
     }
-    @Override
+   /* @Override
     public void onPause() {
         super.onPause();
         //pausar();
@@ -49,5 +49,5 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, AudioService.class);
         i.putExtra("action", AudioService.START);
         startService(i);
-    }
+    }*/
 }

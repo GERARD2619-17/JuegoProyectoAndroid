@@ -1,19 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondoconfig"
+    android:gravity="center"
     tools:context=".Configuracion">
 
-    <Button
-        android:id="@+id/button5"
+    <TextView
+        android:id="@+id/txtsonido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="borrarDatos_onClick"
-        android:text="Borrar datos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="200dp"
+        android:text="@string/txtsonido"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_red_dark" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitCenter">
+
+
+            <ToggleButton
+                android:id="@+id/play_pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/selector"
+                android:textOn="ON"
+                android:textOff="OFF"
+                android:text="ToggleButton"
+                />
+
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtvolumen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/txtvolumen"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <SeekBar
+        android:id="@+id/volumeSeekbar"
+        android:layout_width="267dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="20dp"
+        />
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="borrarDatos_onClick"
+            android:gravity="center_vertical"
+            android:text="Borrar datos"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnpantallaAtras"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="180dp"
+        android:layout_marginRight="@android:dimen/app_icon_size"
+        android:background="@android:drawable/ic_menu_revert"
+        android:backgroundTint="?attr/colorControlActivated" />
+</LinearLayout>

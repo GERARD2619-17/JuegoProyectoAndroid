@@ -5,16 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class Configuracion extends AppCompatActivity implements View.OnClickListener{
-    Button btnstop,btnplay,btnpantallaAtras;
+    private TextView tituloconfiguracion,txtVolumen;
+    private Typeface Letraconfiguracion,LetraVolumen;
+
+    Button btnpantallaAtras;
+    ToggleButton play_pause;
     AudioManager audioManager;
     SeekBar sk_volumen;
     private SharedPreferences Desbloqueados;
@@ -23,15 +30,19 @@ public class Configuracion extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
+
+        String fuente = "fuentes/shlop rg.ttf";
+        this.Letraconfiguracion = Typeface.createFromAsset(getAssets(),fuente);
+        this.LetraVolumen = Typeface.createFromAsset(getAssets(),fuente);
+        tituloconfiguracion = (TextView) findViewById(R.id.txtsonido);
+        tituloconfiguracion.setTypeface(Letraconfiguracion);
+        txtVolumen = (TextView) findViewById(R.id.txtvolumen);
+        txtVolumen.setTypeface(LetraVolumen);
+
         this.Desbloqueados = getSharedPreferences(Mundo1.ARCHIVO,MODE_PRIVATE);
 
-        btnstop = findViewById(R.id.btnstop);
-
-        btnstop.setOnClickListener(this);
-
-        btnplay = findViewById(R.id.btnplay);
-
-        btnplay.setOnClickListener(this);
+        play_pause = findViewById(R.id.play_pause);
+        play_pause.setOnClickListener(this);
         btnpantallaAtras = findViewById(R.id.btnpantallaAtras);
         btnpantallaAtras.setOnClickListener(this);
         Volumen();
@@ -74,17 +85,8 @@ public class Configuracion extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnstop: {
-                // Intent a = new Intent(this, PantallaActivity2.class);
-                Intent i = new Intent(this, AudioService.class);
-                i.putExtra("action", AudioService.PAUSE);
-                startService(i);
-                //  startService(a);
 
-
-            }
-            break;
-            case R.id.btnplay:{
+            case R.id.play_pause:{
                 Intent pantalla1 = new Intent(this, MainActivity.class);
                 Intent pantalla2 = new Intent(this, MULTIJUGADOR.class);
                 Intent pantalla3 = new Intent(this, Mundo1.class);
@@ -93,6 +95,9 @@ public class Configuracion extends AppCompatActivity implements View.OnClickList
                 Intent pantalla6 = new Intent(this, SelectorMundos.class);
                 Intent i = new Intent(this, AudioService.class);
                 i.putExtra("action", AudioService.START);
+                Intent pa = new Intent(this, AudioService.class);
+                pa.putExtra("action", AudioService.PAUSE);
+                startService(pa);
                 startService(i);
                 startService(pantalla1);
                 startService(pantalla2);
