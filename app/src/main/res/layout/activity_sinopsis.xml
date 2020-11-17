@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sinopsis">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="312dp"
+        android:layout_height="351dp"
+        android:text="Sinopsis: En el año 20XX, la humanidad vivia en paz, sin ningun tipo de problema, todo era paz y armonia. Pero de repente algo ocurrio, una guerra se avecinaba, ya que moustros habian aparecido en el planeta tierra, ningun lugar era seguro. La humanidad empezo a prepararse para enfrentar a todo tipo de criaturas, momias, hombres lobo, zombies, entre otros horrores indescriptibles que solo se conocian de las peliculas de terror. Los humanos se juntaron y empezaron a preparar a todo aquel que pudiera para enfrentarse a la amenaza inminente  que estaba a punto de destruir todo lo que conociamos. Se entrenaron y prepararon en armas para dar fin a los moustros. Ahora te reclutamos a ti jugador para que nos ayudes en nuestra estrategia, dime. ¿ Podras superar los retos que se avecinan, o... venceran los moustros con su fuerza y números?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

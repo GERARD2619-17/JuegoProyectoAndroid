@@ -118,7 +118,7 @@ public class Configuracion extends AppCompatActivity implements View.OnClickList
 
             }break;
 
-
+//Hola este es un comentario
 
         }
     }

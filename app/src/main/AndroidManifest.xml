@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_icono_juego"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SelectorMundos"></activity>
+        <activity android:name=".sinopsis"></activity>
+        <activity android:name=".SelectorMundos" />
         <activity android:name=".Configuracion" />
         <activity
             android:name=".Ganador"
