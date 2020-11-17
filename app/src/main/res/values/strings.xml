@@ -8,6 +8,9 @@
     <string name="btnSiguiente">Siguiente</string>
     <string name="btnAtras1">Atras</string>
     <string name="Configuracion">Configuracion</string>
+    //configuracion
+    <string name="txtsonido">Activar y Desactivar Sonido</string>
+    <string name="txtvolumen">Subir y bajar Volumen</string>
     //pantalla 2
     <string name="txtMenuseleccion">Menu principal</string>
     <string name="btnonline">ORDENADOR</string>
