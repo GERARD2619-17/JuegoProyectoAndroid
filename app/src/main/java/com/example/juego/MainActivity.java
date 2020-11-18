@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         titulo = (TextView) findViewById(R.id.txtMenuPrincipal);
         titulo.setTypeface(Letra);
     }
+    //multijugador
     public void MULTIJUGADOR_onClick(View v){
         Intent multijugador = new Intent(this, PantallaMenuDos.class);
         startActivity(multijugador);
